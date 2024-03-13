@@ -3,11 +3,54 @@ import React from "react";
 import logoim from "../img/Logo3.png";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Signup() {
+  const notify = (e) => {
+    let fName = document.getElementById("firstName").value;
+    let lName = document.getElementById("lastName").value;
+    let email = document.getElementById("email").value;
+    let validEmail = String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+    let password = document.getElementById("password").value;
+    let conPassword = document.getElementById("confirm-password").value;
+    let client = document.getElementById("client").checked;
+    let developer = document.getElementById("developer").checked;
+    let errMsg = "";
+
+    if (!fName) errMsg = "Please enter first name";
+    else if (fName.length < 3) errMsg = "Please enter valid first name";
+    else if (!lName) errMsg = "Please enter last name";
+    else if (lName.length < 3) errMsg = "Please enter valid last name";
+    else if (!validEmail) errMsg = "Please enter valid email";
+    else if (!password) errMsg = "Please enter password";
+    else if (password.length < 6) errMsg = "Please enter strong password";
+    else if (!conPassword) errMsg = "Please enter confirm password";
+    else if (conPassword !== password) errMsg = "Password does'nt matched";
+    else if (!client && !developer) errMsg = "Please select mode";
+
+    if (errMsg) {
+      toast.error(errMsg, {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      e.preventDefault();
+    }
+  };
   return (
     <>
       <Navbar />
+      <ToastContainer />
       <div className="flex justify-center items-center min-h-screen my-20">
         <div className="max-w-md w-full px-6 py-8 bg-white shadow-md rounded-lg">
           <img
@@ -21,44 +64,44 @@ function Signup() {
           <p className="text-center text-gray-600 mt-2">
             Join TurboLance community
           </p>
-          <form className="mt-8 space-y-4">
+          <form className="mt-8 space-y-4" onSubmit={notify}>
             <div className="flex">
               <input
+                id="firstName"
                 type="text"
                 className="border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
                 placeholder="First Name"
-                required
               />
               <div className="px-2"></div>
               <input
+                id="lastName"
                 type="text"
                 className="border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
                 placeholder="Last Name"
-                required
               />
             </div>
             <div>
               <input
-                type="email"
+                id="email"
+                type="text"
                 className="border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
                 placeholder="Email"
-                required
               />
             </div>
             <div>
               <input
+                id="password"
                 type="password"
                 className="border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
                 placeholder="Password"
-                required
               />
             </div>
             <div>
               <input
+                id="confirm-password"
                 type="password"
                 className="border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
                 placeholder="Confirm Password"
-                required
               />
             </div>
             <div className="flex justify-between">
