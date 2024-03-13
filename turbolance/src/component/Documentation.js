@@ -366,20 +366,20 @@ const Documentation = () => {
 
   return (
     <>
-      <nav className="pl-20 bg-white bottom-5 border-b-2">
+      <nav className="pl-5 sm:pl-20 bg-white bottom-5 border-b-2">
         <Link to="/">
-          <img src={img} className="w-52"></img>
+          <img src={img} className="w-32 sm:w-52"></img>
         </Link>
       </nav>
-      <div className="bg-white h-[100%] w-[100wh]">
-        <div className="flex py-10 px-10 ">
-          <div className="flex flex-col w-1/4  mx-2 ">
+      <div className="bg-white h-full w-full">
+        <div className="flex flex-col sm:flex-row py-5 sm:py-10 px-5 sm:px-10">
+          <div className="flex flex-col w-full sm:w-1/4 mx-2 mb-5 sm:mb-0">
             {Object.keys(documents).map((doc) => (
               <button
                 key={doc}
                 className={`p-2 text-left pl-6 ${
                   activeDoc === doc
-                    ? "text-blue-600 border-l-[3px] font-semibold border-l-blue-600"
+                    ? "text-blue-600 border-l-4 font-semibold border-blue-600"
                     : "bg-white font-semibold text-black"
                 }`}
                 onClick={() => setActiveDoc(doc)}
@@ -388,14 +388,14 @@ const Documentation = () => {
               </button>
             ))}
           </div>
-          <div className="w-3/4 p-10 border-2 rounded-2xl mr-10">
-            <h1 className="text-4xl font-bold text-blue-800 ">
+          <div className="w-full sm:w-3/4 p-5 sm:p-10 border-2 rounded-2xl mr-0 sm:mr-10">
+            <h1 className="text-2xl sm:text-4xl font-bold text-blue-800">
               {activeDoc.replace(/([A-Z])/g, " $1").trim()}
             </h1>
-            <p className="text-sm py-2">
+            <p className="text-xs sm:text-sm py-2">
               <i>Effective March 13,2024</i>
             </p>
-            <hr className="bg-blue-500 h-[0.15rem]"></hr>
+            <hr className="bg-blue-500 h-1"></hr>
             <p className="pt-5">{documents[activeDoc]}</p>
           </div>
         </div>
