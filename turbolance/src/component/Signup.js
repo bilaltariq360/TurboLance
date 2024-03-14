@@ -44,8 +44,19 @@ function Signup() {
         progress: undefined,
         theme: "dark",
       });
-      e.preventDefault();
+    } else {
+      toast.success("Account created successfully", {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
+    e.preventDefault();
   };
   return (
     <>
