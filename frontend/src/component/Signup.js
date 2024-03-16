@@ -5,9 +5,12 @@ import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 function Signup() {
-  const notify = (e) => {
+  const notify = async (e) => {
+    e.preventDefault();
+
     let fName = document.getElementById("firstName").value;
     let lName = document.getElementById("lastName").value;
     let email = document.getElementById("email").value;
@@ -44,7 +47,19 @@ function Signup() {
         progress: undefined,
         theme: "dark",
       });
-    } else {
+      return;
+    }
+    try {
+      await axios({
+        method: "post",
+        url: "/Signup",
+        data: {
+          fname: fName,
+          lname: lName,
+          email: email,
+          password: password,
+        },
+      });
       toast.success("Account created successfully", {
         position: "bottom-right",
         autoClose: 2000,
@@ -55,8 +70,25 @@ function Signup() {
         progress: undefined,
         theme: "dark",
       });
+      document.getElementById("firstName").value = "";
+      document.getElementById("lastName").value = "";
+      document.getElementById("email").value = "";
+      document.getElementById("password").value = "";
+      document.getElementById("confirm-password").value = "";
+      document.getElementById("client").checked = false;
+      document.getElementById("developer").checked = false;
+    } catch (error) {
+      toast.error("Failed to create account", {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
-    e.preventDefault();
   };
   return (
     <>
