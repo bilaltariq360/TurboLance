@@ -40,7 +40,6 @@ const Contact = () => {
         progress: undefined,
         theme: "dark",
       });
-      e.preventDefault();
     } else {
       toast.success("Message sent successfully", {
         position: "bottom-right",
@@ -53,6 +52,7 @@ const Contact = () => {
         theme: "dark",
       });
     }
+    e.preventDefault();
   };
   return (
     <>
@@ -71,7 +71,7 @@ const Contact = () => {
             </h1>
             <p className="text-center pt-1">We're here for you</p>
           </div>
-          <form className="mt-8 space-y-4" onSubmit={notify} method="POST">
+          <form className="mt-8 space-y-4" onSubmit={notify}>
             <div>
               <input
                 id="name"

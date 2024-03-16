@@ -5,9 +5,10 @@ import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 function Signup() {
-  const notify = (e) => {
+  const notify = async (e) => {
     let fName = document.getElementById("firstName").value;
     let lName = document.getElementById("lastName").value;
     let email = document.getElementById("email").value;
@@ -44,8 +45,32 @@ function Signup() {
         progress: undefined,
         theme: "dark",
       });
-    } else {
-      toast.success("Account created successfully", {
+      return;
+    }
+    try {
+      await axios({
+        method: "post",
+        url: "/Signup",
+        data: {
+          fname: fName,
+          lname: lName,
+          email: email,
+          password: password,
+          conPassword: conPassword,
+        },
+      });
+      toast.success("Message sent successfully", {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } catch (error) {
+      toast.error("Failed to send message", {
         position: "bottom-right",
         autoClose: 2000,
         hideProgressBar: false,

@@ -3,14 +3,20 @@ const router = express.Router();
 
 const schemas = require("../models/schemas");
 
-router.post("/Contact", async (req, res) => {
-  const newContact = new schemas.Users({ name: name, email: email });
-  const saveContact = await newContact.save();
+router.post("/Signup", async (req, res) => {
+  const { fname, lname, email, password, confirmPassword } = req.body;
+  const newSignup = new schemas.Signup({
+    fname: fname,
+    lname: lname,
+    email: email,
+    password: password,
+    confirmPassword: confirmPassword,
+  });
+  const saveSignup = await newSignup.save();
 
-  if (saveContact) res.send("OKKK");
+  if (saveSignup) res.send("200");
+  else res.send("404");
   res.end();
 });
-
-router.get("/users", (req, res) => {});
 
 module.exports = router;
