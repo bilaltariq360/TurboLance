@@ -66,9 +66,9 @@ const documents = {
       </strong>
       <br></br>
       <p>
-        These Terms of Service are governed by the laws. Any disputes arising
-        from these terms shall be resolved through arbitration in accordance
-        with the rules.
+        These Terms of Service are governed by the laws of [Your Jurisdiction].
+        Any disputes arising from these terms shall be resolved through
+        arbitration in accordance with the rules of [Arbitration Association].
       </p>
       <br></br>
 
@@ -87,13 +87,7 @@ const documents = {
         By using TurboLance, you agree to abide by these Terms of Service. If
         you have any questions or concerns about our terms and conditions,
         please contact us at{" "}
-        <a
-          href="mailto:terms@turbolance.com"
-          className="text-blue-500 font-semibold"
-        >
-          terms@turbolance.com
-        </a>
-        .
+        <a href="mailto:terms@turbolance.com">terms@turbolance.com</a>.
       </p>
       <br></br>
     </>
@@ -273,13 +267,7 @@ const documents = {
         Your feedback is valuable to us as we strive to improve accessibility on
         TurboLance. If you encounter any accessibility issues or have
         suggestions for improvement, please contact us at{" "}
-        <a
-          href="mailto:contact@turbolance.com"
-          className="text-blue-500 font-semibold"
-        >
-          contact@turbolance.com
-        </a>
-        .
+        <a href="mailto:contact@turbolance.com">contact@turbolance.com</a>.
       </p>
       <br></br>
 
@@ -310,10 +298,10 @@ const documents = {
         1. Licenses and Third-Party Content
       </strong>
       <br></br>
-      <strong className="text-xl mt-3 mb-1 pl-4">
+      <strong className="text-xl mt-3 mb-1">
         1.1 Limited License to Use Our Services
       </strong>
-      <p className="pl-4">
+      <p>
         We grant you a limited license to access and use our services, subject
         to your compliance with these Terms of Use and our other Terms of
         Service. While we strive to maintain the availability of our services,
@@ -322,10 +310,8 @@ const documents = {
       </p>
       <br></br>
 
-      <strong className="text-xl mt-3 mb-1 pl-4">
-        1.2 Termination of License
-      </strong>
-      <p className="pl-4">
+      <strong className="text-xl mt-3 mb-1">1.2 Termination of License</strong>
+      <p>
         We reserve the right to terminate your license to use our services at
         any time, particularly if you violate these Terms of Use or any other
         part of our Terms of Service. Upon termination, you must cease using our
@@ -333,10 +319,10 @@ const documents = {
       </p>
       <br></br>
 
-      <strong className="text-xl mt-3 mb-1 pl-4">
+      <strong className="text-xl mt-3 mb-1">
         1.3 Intellectual Property Rights
       </strong>
-      <p className="pl-4">
+      <p>
         Our trademarks, copyrights, patents, and other intellectual property
         rights are reserved. You may not use any of TurboLance's intellectual
         property without our express permission. This includes our logos, names,
@@ -344,17 +330,18 @@ const documents = {
       </p>
       <br></br>
 
-      <strong className="text-xl mt-3 mb-1 pl-4">
-        1.4 User-Generated Content
+      <strong className="text-xl mt-3 mb-1">1.4 User-Generated Content</strong>
+      <strong className="text-lg mt-2 mb-1">
+        1.4.1 Responsibility for Your Content
       </strong>
-      <p className="pl-4">
+      <p>
         You are solely responsible for any content you post on TurboLance. If
         your content results in legal action against us, you agree to indemnify
         us for any associated legal fees and expenses. When posting content,
         ensure that:
       </p>
       <br></br>
-      <ul className="list-disc ml-5 pl-4">
+      <ul className="list-disc ml-5">
         <li>You have the right to post it.</li>
         <li>It is legal.</li>
         <li>
@@ -363,7 +350,7 @@ const documents = {
         </li>
       </ul>
       <br></br>
-      <p className="pl-4">
+      <p>
         You acknowledge that the content poster is liable for any harm caused by
         their content, not TurboLance. You agree to defend and indemnify us, our
         partners, employees, and representatives against any legal or
