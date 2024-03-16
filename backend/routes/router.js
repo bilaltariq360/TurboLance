@@ -4,13 +4,12 @@ const router = express.Router();
 const schemas = require("../models/schemas");
 
 router.post("/Signup", async (req, res) => {
-  const { fname, lname, email, password, confirmPassword } = req.body;
+  const { fname, lname, email, password } = req.body;
   const newSignup = new schemas.Signup({
     fname: fname,
     lname: lname,
     email: email,
     password: password,
-    confirmPassword: confirmPassword,
   });
   const saveSignup = await newSignup.save();
 

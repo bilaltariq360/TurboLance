@@ -9,6 +9,8 @@ import axios from "axios";
 
 function Signup() {
   const notify = async (e) => {
+    e.preventDefault();
+
     let fName = document.getElementById("firstName").value;
     let lName = document.getElementById("lastName").value;
     let email = document.getElementById("email").value;
@@ -56,10 +58,9 @@ function Signup() {
           lname: lName,
           email: email,
           password: password,
-          conPassword: conPassword,
         },
       });
-      toast.success("Message sent successfully", {
+      toast.success("Account created successfully", {
         position: "bottom-right",
         autoClose: 2000,
         hideProgressBar: false,
@@ -69,8 +70,15 @@ function Signup() {
         progress: undefined,
         theme: "dark",
       });
+      document.getElementById("firstName").value = "";
+      document.getElementById("lastName").value = "";
+      document.getElementById("email").value = "";
+      document.getElementById("password").value = "";
+      document.getElementById("confirm-password").value = "";
+      document.getElementById("client").checked = false;
+      document.getElementById("developer").checked = false;
     } catch (error) {
-      toast.error("Failed to send message", {
+      toast.error("Failed to create account", {
         position: "bottom-right",
         autoClose: 2000,
         hideProgressBar: false,
@@ -81,7 +89,6 @@ function Signup() {
         theme: "dark",
       });
     }
-    e.preventDefault();
   };
   return (
     <>
