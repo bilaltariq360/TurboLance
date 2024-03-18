@@ -1,5 +1,4 @@
-// SignUp.js
-import React from "react";
+import React, { useState } from "react";
 import logoim from "../img/Logo3.png";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
@@ -8,6 +7,8 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 function Signup() {
+  const [validation, setValidation] = useState(false);
+
   const notify = async (e) => {
     e.preventDefault();
 
@@ -49,27 +50,9 @@ function Signup() {
       });
       return;
     }
+
     try {
-      await axios({
-        method: "post",
-        url: "/Signup",
-        data: {
-          fname: fName,
-          lname: lName,
-          email: email,
-          password: password,
-        },
-      });
-      toast.success("Account created successfully", {
-        position: "bottom-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      setValidation(true);
       document.getElementById("firstName").value = "";
       document.getElementById("lastName").value = "";
       document.getElementById("email").value = "";
@@ -90,6 +73,7 @@ function Signup() {
       });
     }
   };
+  
   return (
     <>
       <Navbar />
@@ -173,12 +157,23 @@ function Signup() {
             </div>
 
             <div>
-              <button
-                type="submit"
-                className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 mt-6"
-              >
-                Create Account
-              </button>
+              {validation ? (
+                <Link to="/otp">
+                  <button 
+                    type="submit"
+                    className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 mt-6"
+                  >
+                    Create Account
+                  </button>
+                </Link>
+              ) : (
+                <button 
+                  type="submit"
+                  className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 mt-6"
+                >
+                  Create Account
+                </button>
+              )}
             </div>
           </form>
           <div className="text-center mt-4">

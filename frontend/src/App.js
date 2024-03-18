@@ -10,6 +10,7 @@ import Contact from "./component/Contact";
 import Footer from "./component/Footer";
 import Dashboard from "./component/Dashboard";
 import Documentation from "./component/Documentation";
+import Otp from "./component/otp"
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/Contact" element={<Contact />} />
         <Route path="Footer" element={<Footer />} />
         <Route path="/Documentation" element={<Documentation />} />
+        <Route path="/Otp" element={<Otp />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
