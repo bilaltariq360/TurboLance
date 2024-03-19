@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import logoim from "../img/Logo3.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,8 +10,7 @@ function Signup() {
   let lName = "";
   let email = "";
   let password = "";
-  const [validation, setValidation] = useState(false);
-  const [data, setdata] = useState({});
+  const navigate = useNavigate();
 
   const notify = async (e) => {
     e.preventDefault();
@@ -55,15 +54,11 @@ function Signup() {
       return;
     }
 
-    setValidation(true);
-    setdata({ fName: fName, lName: lName, email: email, password: password });
-    document.getElementById("firstName").value = "";
-    document.getElementById("lastName").value = "";
-    document.getElementById("email").value = "";
-    document.getElementById("password").value = "";
-    document.getElementById("confirm-password").value = "";
-    document.getElementById("client").checked = false;
-    document.getElementById("developer").checked = false;
+    navigate("/otp", {
+      state: {
+        data: { fName: fName, lName: lName, email: email, password: password },
+      },
+    });
   };
 
   return (
@@ -149,23 +144,14 @@ function Signup() {
             </div>
 
             <div>
-              {validation ? (
-                <Link to="/otp" state={{ data: data }}>
-                  <button
-                    type="submit"
-                    className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 mt-6"
-                  >
-                    Create Account
-                  </button>
-                </Link>
-              ) : (
+              <div>
                 <button
                   type="submit"
                   className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 mt-6"
                 >
                   Create Account
                 </button>
-              )}
+              </div>
             </div>
           </form>
           <div className="text-center mt-4">

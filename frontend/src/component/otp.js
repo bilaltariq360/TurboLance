@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import logoim from "../img/Logo3.png";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -8,9 +8,9 @@ import axios from "axios";
 
 let generatedOTP = "";
 function Otp(props) {
+  const navigate = useNavigate();
   const location = useLocation();
   let data = location.state.data;
-  const [validation, setValidation] = useState(false);
   generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
 
   const sendOtp = async () => {
@@ -49,7 +49,18 @@ function Otp(props) {
         progress: undefined,
         theme: "dark",
       });
-      setValidation(true);
+      navigate("/");
+    } else {
+      toast.error("OTP didn't matched", {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
   };
 
