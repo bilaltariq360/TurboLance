@@ -4,23 +4,27 @@ import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
 
 function Signup() {
+  let fName = "";
+  let lName = "";
+  let email = "";
+  let password = "";
   const [validation, setValidation] = useState(false);
+  const [data, setdata] = useState({});
 
   const notify = async (e) => {
     e.preventDefault();
 
-    let fName = document.getElementById("firstName").value;
-    let lName = document.getElementById("lastName").value;
-    let email = document.getElementById("email").value;
+    fName = document.getElementById("firstName").value;
+    lName = document.getElementById("lastName").value;
+    email = document.getElementById("email").value;
     let validEmail = String(email)
       .toLowerCase()
       .match(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );
-    let password = document.getElementById("password").value;
+    password = document.getElementById("password").value;
     let conPassword = document.getElementById("confirm-password").value;
     let client = document.getElementById("client").checked;
     let developer = document.getElementById("developer").checked;
@@ -51,29 +55,17 @@ function Signup() {
       return;
     }
 
-    try {
-      setValidation(true);
-      document.getElementById("firstName").value = "";
-      document.getElementById("lastName").value = "";
-      document.getElementById("email").value = "";
-      document.getElementById("password").value = "";
-      document.getElementById("confirm-password").value = "";
-      document.getElementById("client").checked = false;
-      document.getElementById("developer").checked = false;
-    } catch (error) {
-      toast.error("Failed to create account", {
-        position: "bottom-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-    }
+    setValidation(true);
+    setdata({ fName: fName, lName: lName, email: email, password: password });
+    document.getElementById("firstName").value = "";
+    document.getElementById("lastName").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("password").value = "";
+    document.getElementById("confirm-password").value = "";
+    document.getElementById("client").checked = false;
+    document.getElementById("developer").checked = false;
   };
-  
+
   return (
     <>
       <Navbar />
@@ -158,8 +150,8 @@ function Signup() {
 
             <div>
               {validation ? (
-                <Link to="/otp">
-                  <button 
+                <Link to="/otp" state={{ data: data }}>
+                  <button
                     type="submit"
                     className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 mt-6"
                   >
@@ -167,7 +159,7 @@ function Signup() {
                   </button>
                 </Link>
               ) : (
-                <button 
+                <button
                   type="submit"
                   className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 mt-6"
                 >
