@@ -14,6 +14,16 @@ function Otp(props) {
   generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
 
   const sendOtp = async () => {
+    toast.success("OTP sent", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
     await axios({
       method: "post",
       url: "/Otp",
@@ -29,16 +39,6 @@ function Otp(props) {
     let otp = document.getElementById("otp").value;
 
     if (otp === generatedOTP) {
-      await axios({
-        method: "post",
-        url: "/Signup",
-        data: {
-          fname: data.fName,
-          lname: data.lName,
-          email: data.email,
-          password: data.password,
-        },
-      });
       toast.success("Account created successfully", {
         position: "bottom-right",
         autoClose: 2000,
@@ -48,6 +48,16 @@ function Otp(props) {
         draggable: true,
         progress: undefined,
         theme: "dark",
+      });
+      await axios({
+        method: "post",
+        url: "/Signup",
+        data: {
+          fname: data.fName,
+          lname: data.lName,
+          email: data.email,
+          password: data.password,
+        },
       });
       navigate("/");
     } else {
@@ -91,13 +101,11 @@ function Otp(props) {
             <div>
               <button
                 onClick={sendOtp}
-                type="submit"
+                type="button"
                 className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 mt-6"
               >
                 Send OTP
               </button>
-
-              {/* <Link to="/"> */}
               <button
                 onClick={notify}
                 type="submit"
@@ -105,7 +113,6 @@ function Otp(props) {
               >
                 Verify
               </button>
-              {/* </Link> */}
             </div>
           </form>
         </div>
