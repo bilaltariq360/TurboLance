@@ -1,13 +1,27 @@
 // Dashboard.js
-import React, { useState } from "react";
+import { React, useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import ProfilePic from "../img/profile-pic.svg";
 import { IoIosAdd, IoIosCloseCircle } from "react-icons/io";
+import { useLocation } from "react-router-dom";
 import { FaSave } from "react-icons/fa";
 import Footer from "./Footer";
+import axios from "axios";
 
 function Dashboard() {
   const [skills, setSkills] = useState([]);
+  const [users, setUsers] = useState([]);
+  const location = useLocation();
+  let data = location.state.data;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get("/Dashboard");
+      setUsers(response.data);
+    };
+
+    fetchData();
+  }, []);
 
   function addSkill() {
     const newSkill = document.getElementById("skill").value;
@@ -28,7 +42,7 @@ function Dashboard() {
           <img src={ProfilePic} className="w-[10rem] md:w-[12rem]" />
           <div className="flex flex-col border-l-blue-800 border-l-4">
             <h1 className=" pl-5 text-3xl md:text-4xl font-bold text-gray-700">
-              Bilal Tariq
+              {data.fName + " " + data.lName}
             </h1>
             <p className=" pl-5 font-semibold text-gray-700">
               Software Engineer

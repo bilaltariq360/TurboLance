@@ -1,25 +1,19 @@
 // Signin
 import { React, useEffect } from "react";
 import logoim from "../img/Logo3.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 function Signin() {
+  const navigate = useNavigate();
   let users;
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await axios.get("/Signin");
-        // Handle response data here if needed
-        document.getElementById("email").value = response.data.fname;
-        console.log(response.data);
-      } catch (error) {
-        // Handle error here
-        console.error("Error fetching data:", error);
-      }
+      const response = await axios.get("/Signin");
+      users = response.data;
     };
 
     fetchData();
@@ -38,7 +32,7 @@ function Signin() {
 
     if (!validEmail) errMsg = "Please enter valid email";
     else if (!password) errMsg = "Please enter password";
-    else if (password.length < 6) errMsg = "Please enter correct password";
+    else if (password.length < 6) errMsg = "No record found!";
 
     if (errMsg) {
       toast.error(errMsg, {
@@ -52,16 +46,47 @@ function Signin() {
         theme: "dark",
       });
     } else {
-      toast.success("Loged in successfully", {
-        position: "bottom-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      let found = false;
+      let i = 0;
+      for (i = 0; i < users.length; i++) {
+        if (users[i].email === email && users[i].password === password) {
+          found = true;
+          toast.success("Loged in successfully", {
+            position: "bottom-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+          break;
+        }
+      }
+
+      if (!found) {
+        toast.error("No record found!", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      } else {
+        navigate("/Dashboard", {
+          state: {
+            data: {
+              fName: users[i].fname,
+              lName: users[i].lname,
+              email: users[i].email,
+            },
+          },
+        });
+      }
     }
     e.preventDefault();
   };
