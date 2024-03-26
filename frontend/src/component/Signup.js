@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import logoim from "../img/Logo3.png";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
@@ -6,11 +6,21 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Signup() {
+  const [developer, setDeveloper] = useState(false);
   let fName = "";
   let lName = "";
   let email = "";
   let password = "";
+  let client = false;
   const navigate = useNavigate();
+
+  let check = () => {
+    setDeveloper(document.getElementById("developer").checked);
+  };
+
+  let unCheck = () => {
+    setDeveloper(document.getElementById("developer").checked);
+  };
 
   const notify = async (e) => {
     e.preventDefault();
@@ -18,6 +28,10 @@ function Signup() {
     fName = document.getElementById("firstName").value;
     lName = document.getElementById("lastName").value;
     email = document.getElementById("email").value;
+    let career = "";
+    if (developer) {
+      career = document.getElementById("career").value;
+    }
     let validEmail = String(email)
       .toLowerCase()
       .match(
@@ -25,8 +39,8 @@ function Signup() {
       );
     password = document.getElementById("password").value;
     let conPassword = document.getElementById("confirm-password").value;
-    let client = document.getElementById("client").checked;
-    let developer = document.getElementById("developer").checked;
+    client = document.getElementById("client").checked;
+    setDeveloper(document.getElementById("developer").checked);
     let errMsg = "";
 
     if (!fName) errMsg = "Please enter first name";
@@ -39,6 +53,7 @@ function Signup() {
     else if (!conPassword) errMsg = "Please enter confirm password";
     else if (conPassword !== password) errMsg = "Password does'nt matched";
     else if (!client && !developer) errMsg = "Please select mode";
+    else if (developer && career.length < 3) errMsg = "Please select carrer";
 
     if (errMsg) {
       toast.error(errMsg, {
@@ -121,6 +136,7 @@ function Signup() {
             <div className="flex justify-between">
               <div className="flex items-center">
                 <input
+                  onClick={unCheck}
                   type="radio"
                   id="client"
                   name="userType"
@@ -132,6 +148,7 @@ function Signup() {
               </div>
               <div className="flex items-center">
                 <input
+                  onClick={check}
                   type="radio"
                   id="developer"
                   name="userType"
@@ -142,7 +159,18 @@ function Signup() {
                 </label>
               </div>
             </div>
-
+            {!developer ? (
+              <div></div>
+            ) : (
+              <div>
+                <input
+                  id="career"
+                  type="text"
+                  className="border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
+                  placeholder="Career/Profession"
+                />
+              </div>
+            )}
             <div>
               <div>
                 <button
