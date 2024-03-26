@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logoim from "../img/Logo3.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
@@ -11,9 +11,13 @@ function Otp(props) {
   const navigate = useNavigate();
   const location = useLocation();
   let data = location.state.data;
-  generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
+
+  useEffect(() => {
+    sendOtp();
+  }, []);
 
   const sendOtp = async () => {
+    generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
     toast.success("OTP sent", {
       position: "bottom-right",
       autoClose: 2000,
@@ -88,7 +92,9 @@ function Otp(props) {
           <h1 className="text-center text-3xl font-bold mt-6 pl-5 text-gray-800">
             Verify your account
           </h1>
-
+          <p className="text-center text-ellipsis overflow-clip text-gray-600 mt-2">
+            OTP sent to <span className="font-bold">{generatedOTP}</span>
+          </p>
           <form className="mt-8 space-y-4" onSubmit={notify}>
             <div>
               <input
@@ -104,7 +110,7 @@ function Otp(props) {
                 type="button"
                 className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 mt-6"
               >
-                Send OTP
+                Send OTP Again
               </button>
               <button
                 onClick={notify}

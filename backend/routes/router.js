@@ -3,8 +3,14 @@ const bcrypt = require("bcryptjs");
 const router = express.Router();
 const nodemailer = require("nodemailer");
 const schemas = require("../models/schemas");
+const EmailValidator = require("email-deep-validator");
+
 //const path = require('path');
 
+router.get("/Signin", async (req, res) => {
+  const users = await schemas.Signup.find({});
+  res.send(users);
+});
 router.post("/Otp", async (req, res) => {
   const { email, otp } = req.body;
   let transporter = await nodemailer.createTransport({
@@ -20,12 +26,66 @@ router.post("/Otp", async (req, res) => {
 
   let info = await transporter.sendMail({
     from: {
-      name: "TurboLance",
+      name: "TurboLance Inc.",
       address: "curiousbytes2@gmail.com",
     },
     to: `${email}`,
-    subject: "TurboLance Account OTP Verification",
-    html: `<h4>Welcome to TurboLance account creation</h4><h4>Your 6 digit OTP is: <span style = "color:red">${otp}</span></h4>`,
+    subject: "TurboLance Account Verification",
+    html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        /* Styling for the email */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: rgb(30, 58, 158);
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            text-align: center;
+        }
+
+        .otp {
+            color: red;
+            font-size: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome to TurboLance</h1>
+            <p>Account Creation OTP Verification</p>
+        </div>
+        <div class="content">
+            <p>Your 6 digit OTP is:</p>
+            <p class="otp">${otp}</p>
+        </div>
+    </div>
+</body>
+
+</html>`, //`<h4>Welcome to TurboLance account creation</h4><h4>Your 6 digit OTP is: <span style = "color:red">${otp}</span></h4>`,
     // attachments: [{
     //   filename: 'Logo3.png',
     //   path: path.join(__dirname, '../img/Logo3.png'),
