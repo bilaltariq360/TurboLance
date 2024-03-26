@@ -1,13 +1,32 @@
 // Signin
-import React from "react";
+import { React, useEffect } from "react";
 import logoim from "../img/Logo3.png";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 function Signin() {
+  let users;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("/Signin");
+        // Handle response data here if needed
+        document.getElementById("email").value = response.data.fname;
+        console.log(response.data);
+      } catch (error) {
+        // Handle error here
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const notify = (e) => {
+    e.preventDefault();
     let email = document.getElementById("email").value;
     let validEmail = String(email)
       .toLowerCase()
