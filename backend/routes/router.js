@@ -12,7 +12,7 @@ router.get("/Signin", async (req, res) => {
   res.send(users);
 });
 router.post("/Otp", async (req, res) => {
-  const { email, otp } = req.body;
+  const { email, name, otp } = req.body;
   let transporter = await nodemailer.createTransport({
     service: "gmail",
     host: "smtp.gmail.com",
@@ -73,6 +73,7 @@ router.post("/Otp", async (req, res) => {
 </head>
 
 <body>
+<h3> Welcome ${name}.<h3>
     <div class="container">
         <div class="header">
             <h1>Welcome to TurboLance</h1>

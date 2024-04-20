@@ -11,9 +11,13 @@ function Otp(props) {
   const navigate = useNavigate();
   const location = useLocation();
   let data = location.state.data;
+  let firstOTP = true;
 
   useEffect(() => {
-    sendOtp();
+    if (firstOTP) {
+      sendOtp();
+      firstOTP = !firstOTP;
+    }
   }, []);
 
   const sendOtp = async () => {
@@ -33,6 +37,7 @@ function Otp(props) {
       url: "/Otp",
       data: {
         email: data.email,
+        name: data.fName + " " + data.lName,
         otp: generatedOTP,
       },
     });
@@ -93,7 +98,7 @@ function Otp(props) {
             Verify your account
           </h1>
           <p className="text-center text-ellipsis overflow-clip text-gray-600 mt-2">
-            OTP sent to <span className="font-bold">{generatedOTP}</span>
+            OTP sent to <span className="font-bold">{data.email}</span>
           </p>
           <form className="mt-8 space-y-4" onSubmit={notify}>
             <div>
