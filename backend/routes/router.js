@@ -12,7 +12,7 @@ router.get("/Signin", async (req, res) => {
   res.send(users);
 });
 router.post("/Otp", async (req, res) => {
-  const { email, otp } = req.body;
+  const { email, name, otp } = req.body;
   let transporter = await nodemailer.createTransport({
     service: "gmail",
     host: "smtp.gmail.com",
@@ -73,9 +73,10 @@ router.post("/Otp", async (req, res) => {
 </head>
 
 <body>
+<p> Welcome <b>${name}</b>, to TurboLance! We are thrilled to have you join our community of talented freelancers. To get started, please use the OTP (One-Time Password) that has been sent to your registered email address to verify your account. This extra layer of security ensures that your account remains safe and protected. Once your account is verified, you'll have access to exciting freelance opportunities, a vibrant network of clients, and useful resources to support your freelancing journey.<p>
     <div class="container">
         <div class="header">
-            <h1>Welcome to TurboLance</h1>
+            <h1>TurboLance</h1>
             <p>Account Creation OTP Verification</p>
         </div>
         <div class="content">
