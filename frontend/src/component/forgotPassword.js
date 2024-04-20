@@ -3,24 +3,29 @@ import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your logic for handling forgot password request here
-    // For example, send a reset password link to the provided email
-    // Display appropriate notifications to the user
-    toast.success("Password reset instructions sent to your email", {
+    toast.success("Password sent to your email!", {
       position: "bottom-right",
-      autoClose: 5000,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: false,
       draggable: true,
       progress: undefined,
       theme: "dark",
+    });
+    await axios({
+      method: "post",
+      url: "/ForgotPassword",
+      data: {
+        email: "hafizbilaltariq360@gmail.com",
+      },
     });
   };
 
@@ -44,7 +49,10 @@ function ForgotPassword() {
               />
             </div>
             <div className="text-right">
-              <Link to="/signin" className="text-blue-600 text-sm hover:underline">
+              <Link
+                to="/signin"
+                className="text-blue-600 text-sm hover:underline"
+              >
                 Remember your password? Sign in
               </Link>
             </div>
@@ -53,7 +61,7 @@ function ForgotPassword() {
                 type="submit"
                 className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 mt-6"
               >
-                Reset Password
+                Send Password
               </button>
             </div>
           </form>

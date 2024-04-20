@@ -119,5 +119,50 @@ router.post("/Signup", async (req, res) => {
   else res.send("404");
   res.end();
 });
+router.post("/ForgotPassword", async (req, res) => {
+  const { email } = req.body;
+  const users = await schemas.Signup.find({
+    email: email,
+  });
+  let transporter = await nodemailer.createTransport({
+    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    auth: {
+      user: "curiousbytes2@gmail.com",
+      pass: "svrv buoh cjrz ddmb",
+    },
+  });
+
+  let info = await transporter.sendMail({
+    from: {
+      name: "TurboLance Inc.",
+      address: "curiousbytes2@gmail.com",
+    },
+    to: `${email}`,
+    subject: "TurboLance Account Password Recovery",
+    html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+</head>
+
+<body>
+<p><b>${
+      users[0].fname + " " + users[0].lname
+    }</b> your Turbolance account password is: <b>${users[0].password}</b></p>
+</body>
+
+</html>`,
+  });
+  const sendMail = async (transporter, mailOptions) => {
+    try {
+      await transporter.sendMail(mailOptions);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+});
 
 module.exports = router;
