@@ -121,9 +121,9 @@ function Signin() {
               />
             </div>
             <div className="text-right">
-              <a href="#" className="text-blue-600 text-sm hover:underline">
+              <Link to="/forgotPassword" className="text-blue-600 text-sm hover:underline">
                 Forgot Password?
-              </a>
+              </Link>
             </div>
             <div>
               <button

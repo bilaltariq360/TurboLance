@@ -58,7 +58,7 @@ function Navbar() {
             <div>
               <Link to="/Signin">
                 <button className="bg-white text-blue-900 mx-[0.3rem] w-[6.5rem] py-[0.3rem] border-blue-800 border-[0.13rem] rounded-md font-semibold hover:bg-slate-100 duration-300">
-                  Login
+                  Signin
                 </button>
               </Link>
               <Link to="/Signup">
@@ -127,7 +127,7 @@ function Navbar() {
             <div className="flex flex-col">
               <Link to="/Signin">
                 <button className="bg-white text-blue-900 mx-[0.3rem] w-[20rem] py-[0.3rem] border-blue-800 border-[0.13rem] rounded-md font-semibold hover:bg-slate-100 duration-300">
-                  Login
+                  Signin
                 </button>
               </Link>
               <Link to="/Signup">
