@@ -10,8 +10,17 @@ const signupSchema = new Schema({
   entryDate: { type: Date, default: Date.now },
 });
 
-const Signup = mongoose.model("Signup", signupSchema, "signup_accounts");
+const devAccSchema = new Schema({
+  email: { type: String },
+  tagline: { type: String },
+  skills: { type: [String], default: [] },
+  hourlyRate: { type: String },
+  entryDate: { type: Date, default: Date.now },
+});
 
-const mySchemas = { Signup: Signup };
+const Signup = mongoose.model("Signup", signupSchema, "signup_accounts");
+const DevAcc = mongoose.model("DevAcc", devAccSchema, "dev_acc");
+
+const mySchemas = { Signup: Signup, DevAcc: DevAcc };
 
 module.exports = mySchemas;
