@@ -34,6 +34,22 @@ function Dashboard() {
       document.getElementById("skill").value = "";
     }
   }
+
+  let saveData = async () => {
+    let tagline = document.getElementById("tagline").value;
+    let skill = document.getElementById("skill").value;
+    let hourlyRate = document.getElementById("hourlyRate").value;
+    const response = await axios({
+      method: "post",
+      url: "/Dashboard",
+      data: {
+        email: data.email,
+        tagline: tagline,
+        skill: skills,
+        hourlyRate: hourlyRate,
+      },
+    });
+  };
   return (
     <>
       <Navbar />
@@ -55,6 +71,7 @@ function Dashboard() {
           </label>
           <input
             type="text"
+            id="tagline"
             className="border-2 px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
             placeholder="This sould be shown on your gig"
             required
@@ -105,6 +122,7 @@ function Dashboard() {
               </button>
               <input
                 type="text"
+                id="hourlyRate"
                 className="border-2 w-full px-4 py-2 rounded-r-md focus:outline-none focus:border-blue-400"
                 placeholder="Hourly rate in dollars"
                 required
@@ -113,7 +131,7 @@ function Dashboard() {
           </div>
           <div className="flex justify-center mt-24">
             <button
-              type="submit"
+              onClick={saveData}
               className="w-[15rem] h-[3.5rem] font-semibold text-gray-100 bg-blue-900 rounded-md hover:bg-blue-700 duration-300"
             >
               <div className="flex items-center justify-center">

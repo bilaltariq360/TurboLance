@@ -165,4 +165,24 @@ router.post("/ForgotPassword", async (req, res) => {
   };
 });
 
+router.get("/Gigs", async (req, res) => {
+  const dev = await schemas.DevAcc.find({});
+  res.send(dev);
+});
+
+router.post("/Dashboard", async (req, res) => {
+  const { email, tagline, skill, hourlyRate } = req.body;
+  const newDevAcc = new schemas.DevAcc({
+    email: email,
+    tagline: tagline,
+    skills: skill,
+    hourlyRate: hourlyRate,
+  });
+  const saveDevAcc = await newDevAcc.save();
+
+  if (saveDevAcc) res.send("200");
+  else res.send("404");
+  res.end();
+});
+
 module.exports = router;
