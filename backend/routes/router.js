@@ -165,6 +165,11 @@ router.post("/ForgotPassword", async (req, res) => {
   };
 });
 
+router.get("/Gigs", async (req, res) => {
+  const dev = await schemas.DevAcc.find({});
+  res.send(dev);
+});
+
 router.post("/Dashboard", async (req, res) => {
   const { email, tagline, skill, hourlyRate } = req.body;
   const newDevAcc = new schemas.DevAcc({
