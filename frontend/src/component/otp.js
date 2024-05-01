@@ -65,10 +65,12 @@ function Otp(props) {
           fname: data.fName,
           lname: data.lName,
           email: data.email,
+          userMode: data.userMode,
+          devProfession: data.devProfession,
           password: data.password,
         },
       });
-      navigate("/");
+      navigate("/Signin");
     } else {
       toast.error("OTP didn't matched", {
         position: "bottom-right",

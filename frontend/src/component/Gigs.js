@@ -16,7 +16,7 @@ function Gigs() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("Gigs");
+      const response = await axios.get("/Gigs");
       setDevs(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -45,7 +45,7 @@ function Gigs() {
           {devs.map((dev, index) => (
             <div
               key={index}
-              className="bg-white w-[20rem] h-[28rem] rounded-md ml-1 mr-1 mt-10 shadow-lg"
+              className="bg-white cursor-pointer w-[20rem] h-[28rem] rounded-md ml-1 mr-1 mt-10 shadow-lg"
             >
               <img
                 src={androidDeveloper}
@@ -54,15 +54,21 @@ function Gigs() {
               />
               <div className="flex items-center space-x-5 pt-5 px-5">
                 <img src={profilePic} className="w-[2.5rem]" alt="Profile" />
-                <h1 className="font-bold text-md">{dev.email}</h1>
+                <h1 className="font-bold text-md">{dev.fname}</h1>
               </div>
               <p className="px-5 py-2 font-semibold">{dev.tagline}</p>
               <div className="flex items-center space-x-2 px-5 pt-1">
-                {dev.skills.map((skill, index) => (
-                  <div className="text-sm rounded-full bg-blue-200 text-blue-900 px-5 py-[0.1rem] font-bold">
-                    {skill}
-                  </div>
-                ))}
+                {dev.skills.map((skill, index) =>
+                  skill.length > 8 ? (
+                    <div className="text-sm truncate text-ellipsis rounded-full bg-blue-200 text-blue-900 px-5 py-[0.1rem] font-bold">
+                      {skill}
+                    </div>
+                  ) : (
+                    <div className="text-sm rounded-full bg-blue-200 text-blue-900 px-5 py-[0.1rem] font-bold">
+                      {skill}
+                    </div>
+                  )
+                )}
               </div>
               <div className="flex items-center space-x-1 px-5 py-5">
                 <img src={starim} className="w-[1.5rem]" alt="Star" />
