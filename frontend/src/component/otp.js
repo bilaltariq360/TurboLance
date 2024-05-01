@@ -70,7 +70,7 @@ function Otp(props) {
           password: data.password,
         },
       });
-      navigate("/");
+      navigate("/Signin");
     } else {
       toast.error("OTP didn't matched", {
         position: "bottom-right",

@@ -5,11 +5,28 @@ const nodemailer = require("nodemailer");
 const schemas = require("../models/schemas");
 const EmailValidator = require("email-deep-validator");
 
+let logedin = "TurboLance";
+
 //const path = require('path');
 
 router.get("/Signin", async (req, res) => {
-  const users = await schemas.Signup.find({});
+  const email = req.query.email;
+  const users = await schemas.Signup.find({ email: email });
+  if (users) {
+    logedin = email;
+  }
   res.send(users);
+});
+router.get("/Dashboard", async (req, res) => {
+  const devAcc = await schemas.DevAcc.find({ email: logedin });
+  const users = await schemas.Signup.find({ email: logedin });
+  const user = devAcc.map((dev, index) => {
+    return {
+      ...dev.toObject(),
+      ...users[index].toObject(),
+    };
+  });
+  res.send(user);
 });
 router.post("/Otp", async (req, res) => {
   const { email, name, otp } = req.body;
@@ -169,7 +186,15 @@ router.post("/ForgotPassword", async (req, res) => {
 
 router.get("/Gigs", async (req, res) => {
   const dev = await schemas.DevAcc.find({});
-  res.send(dev);
+  const user = dev.map(async (dev) => {
+    const devDetail = await schemas.Signup.find({ email: dev.email });
+    return {
+      ...dev.toObject(),
+      fname: devDetail[0].fname,
+      lname: devDetail[0].lname,
+    };
+  });
+  res.send(user);
 });
 
 router.post("/Dashboard", async (req, res) => {

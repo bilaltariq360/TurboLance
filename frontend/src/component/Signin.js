@@ -10,16 +10,8 @@ import axios from "axios";
 function Signin() {
   const navigate = useNavigate();
   let users;
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get("/Signin");
-      users = response.data;
-    };
 
-    fetchData();
-  }, []);
-
-  const notify = (e) => {
+  const notify = async (e) => {
     e.preventDefault();
     let email = document.getElementById("email").value;
     let validEmail = String(email)
@@ -46,26 +38,13 @@ function Signin() {
         theme: "dark",
       });
     } else {
-      let found = false;
-      let i = 0;
-      for (i = 0; i < users.length; i++) {
-        if (users[i].email === email && users[i].password === password) {
-          found = true;
-          toast.success("Loged in successfully", {
-            position: "bottom-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          });
-          break;
-        }
-      }
-
-      if (!found) {
+      const response = await axios.get("/Signin", {
+        params: {
+          email: email,
+        },
+      });
+      users = response.data;
+      if (!users) {
         toast.error("No record found!", {
           position: "bottom-right",
           autoClose: 2000,
@@ -80,10 +59,10 @@ function Signin() {
         navigate("/Dashboard", {
           state: {
             data: {
-              fName: users[i].fname,
-              lName: users[i].lname,
-              email: users[i].email,
-              devProfession: users[i].devProfession,
+              fName: users[0].fname,
+              lName: users[0].lname,
+              email: users[0].email,
+              devProfession: users[0].devProfession,
             },
           },
         });
