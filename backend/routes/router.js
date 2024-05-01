@@ -103,13 +103,15 @@ router.post("/Otp", async (req, res) => {
 });
 
 router.post("/Signup", async (req, res) => {
-  const { fname, lname, email, password } = req.body;
+  const { fname, lname, email, password, userMode, devProfession } = req.body;
   const salt = await bcrypt.genSalt(10);
   const secPass = await bcrypt.hash(password, salt);
   const newSignup = new schemas.Signup({
     fname: fname,
     lname: lname,
     email: email,
+    userMode: userMode,
+    devProfession: devProfession,
     password: password,
     hashPassword: secPass,
   });

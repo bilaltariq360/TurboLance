@@ -5,6 +5,8 @@ import ProfilePic from "../img/profile-pic.svg";
 import { IoIosAdd, IoIosCloseCircle } from "react-icons/io";
 import { useLocation } from "react-router-dom";
 import { FaSave } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Footer from "./Footer";
 import axios from "axios";
 
@@ -16,8 +18,12 @@ function Dashboard() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get("/Dashboard");
-      setUsers(response.data);
+      try {
+        const response = await axios.get("/Dashboard");
+        setUsers(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
 
     fetchData();
@@ -36,10 +42,41 @@ function Dashboard() {
   }
 
   let saveData = async () => {
+    let errMsg = "";
     let tagline = document.getElementById("tagline").value;
     let skill = document.getElementById("skill").value;
     let hourlyRate = document.getElementById("hourlyRate").value;
-    const response = await axios({
+
+    if (!tagline) errMsg = "Enter tagline!";
+    else if (tagline.length > 60) errMsg = "Shorter your tagline!";
+    else if (!hourlyRate) errMsg = "Enter hourly rate!";
+    else if (isNaN(hourlyRate) || parseInt(hourlyRate) > 10000)
+      errMsg = "Enter valid hourly rate!";
+
+    if (errMsg) {
+      toast.error(errMsg, {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      return;
+    }
+    toast.success("Dashboard updated successfully!", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+    axios({
       method: "post",
       url: "/Dashboard",
       data: {
@@ -53,6 +90,7 @@ function Dashboard() {
   return (
     <>
       <Navbar />
+      <ToastContainer />
       <div className="bg-gray-50 px-8 h-[100vh] lg:h-[130vh]">
         <div className="flex items-center justify-center sm:justify-start">
           <img src={ProfilePic} className="w-[10rem] md:w-[12rem]" />
@@ -61,7 +99,7 @@ function Dashboard() {
               {data.fName + " " + data.lName}
             </h1>
             <p className=" pl-5 font-semibold text-gray-700">
-              Software Engineer
+              {data.devProfession}
             </p>
           </div>
         </div>
@@ -85,7 +123,7 @@ function Dashboard() {
             <input
               type="text"
               className="border-2 w-full px-4 py-2 rounded-l-md focus:outline-none focus:border-blue-400"
-              placeholder="Add skills"
+              placeholder="Add skills (At Max 3)"
               id="skill"
               required
             />

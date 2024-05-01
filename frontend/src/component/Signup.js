@@ -71,7 +71,14 @@ function Signup() {
 
     navigate("/otp", {
       state: {
-        data: { fName: fName, lName: lName, email: email, password: password },
+        data: {
+          fName: fName,
+          lName: lName,
+          email: email,
+          password: password,
+          userMode: !developer ? "user" : "developer",
+          devProfession: !developer ? "" : career,
+        },
       },
     });
   };
