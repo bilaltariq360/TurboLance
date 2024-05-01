@@ -65,6 +65,8 @@ function Otp(props) {
           fname: data.fName,
           lname: data.lName,
           email: data.email,
+          userMode: data.userMode,
+          devProfession: data.devProfession,
           password: data.password,
         },
       });

@@ -5,6 +5,8 @@ const signupSchema = new Schema({
   fname: { type: String },
   lname: { type: String },
   email: { type: String },
+  userMode: { type: String },
+  devProfession: { type: String },
   password: { type: String },
   hashPassword: { type: String },
   entryDate: { type: Date, default: Date.now },

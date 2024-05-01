@@ -45,7 +45,7 @@ function Gigs() {
           {devs.map((dev, index) => (
             <div
               key={index}
-              className="bg-white w-[20rem] h-[28rem] rounded-md ml-1 mr-1 mt-10 shadow-lg"
+              className="bg-white cursor-pointer w-[20rem] h-[28rem] rounded-md ml-1 mr-1 mt-10 shadow-lg"
             >
               <img
                 src={androidDeveloper}
@@ -58,11 +58,17 @@ function Gigs() {
               </div>
               <p className="px-5 py-2 font-semibold">{dev.tagline}</p>
               <div className="flex items-center space-x-2 px-5 pt-1">
-                {dev.skills.map((skill, index) => (
-                  <div className="text-sm rounded-full bg-blue-200 text-blue-900 px-5 py-[0.1rem] font-bold">
-                    {skill}
-                  </div>
-                ))}
+                {dev.skills.map((skill, index) =>
+                  skill.length > 8 ? (
+                    <div className="text-sm truncate text-ellipsis rounded-full bg-blue-200 text-blue-900 px-5 py-[0.1rem] font-bold">
+                      {skill}
+                    </div>
+                  ) : (
+                    <div className="text-sm rounded-full bg-blue-200 text-blue-900 px-5 py-[0.1rem] font-bold">
+                      {skill}
+                    </div>
+                  )
+                )}
               </div>
               <div className="flex items-center space-x-1 px-5 py-5">
                 <img src={starim} className="w-[1.5rem]" alt="Star" />

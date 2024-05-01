@@ -83,6 +83,7 @@ function Signin() {
               fName: users[i].fname,
               lName: users[i].lname,
               email: users[i].email,
+              devProfession: users[i].devProfession,
             },
           },
         });
@@ -121,7 +122,10 @@ function Signin() {
               />
             </div>
             <div className="text-right">
-              <Link to="/forgotPassword" className="text-blue-600 text-sm hover:underline">
+              <Link
+                to="/forgotPassword"
+                className="text-blue-600 text-sm hover:underline"
+              >
                 Forgot Password?
               </Link>
             </div>
