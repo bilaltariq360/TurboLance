@@ -20,6 +20,7 @@ function Footer() {
           <ul className="list-none">
             <li><Link to="/" className="hover:text-gray-300">Home</Link></li>
             <li><Link to="/Gigs" className="hover:text-gray-300">Explore Community</Link></li>
+            <li><Link to="/User" className="hover:text-gray-300">User</Link></li>
             <li><Link to="/Contact" className="hover:text-gray-300">Contact</Link></li>
           </ul>
           </div>
