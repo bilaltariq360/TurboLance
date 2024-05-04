@@ -41,6 +41,14 @@ function Navbar() {
             </li>
             <li>
               <Link
+                to="/User"
+                className="text-blue-900 hover:text-blue-700 text-lg font-semibold"
+              >
+                User
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/Contact"
                 className="text-blue-900 hover:text-blue-700 text-lg font-semibold"
               >
