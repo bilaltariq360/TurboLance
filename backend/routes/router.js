@@ -21,7 +21,8 @@ router.get("/Signin", async (req, res) => {
   }
   res.send(users);
 });
-router.get("/Dashboard", async (req, res) => {
+router.get("/DevDashboard", async (req, res) => {
+  console.log(logedin);
   const devAcc = await schemas.DevAcc.find({ email: logedin });
   const users = await schemas.Signup.find({ email: logedin });
   const user = devAcc.map((dev) => {
@@ -210,7 +211,7 @@ router.get("/Gigs", async (req, res) => {
   }
 });
 
-router.post("/Dashboard", async (req, res) => {
+router.post("/DevDashboard" || "/Dashboard", async (req, res) => {
   const { email, tagline, skill, hourlyRate } = req.body;
   const newDevAcc = new schemas.DevAcc({
     email: email,

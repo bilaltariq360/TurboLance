@@ -60,7 +60,7 @@ function Gigs() {
                       className="w-[2.5rem]"
                       alt="Profile"
                     />
-                    <h1 className="font-bold text-md">
+                    <h1 className="font-bold text-2xl">
                       {dev.fname + " " + dev.lname}
                     </h1>
                   </div>
