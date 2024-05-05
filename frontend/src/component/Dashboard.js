@@ -28,14 +28,7 @@ function Dashboard() {
   return (
     <>
       <Navbar />
-      {users.length > 0 ? (
-        <DevDashboard />
-      ) : (
-        // <div className="bg-gray-50 px-8 h-[90vh] text-5xl font-bold flex justify-center items-center">
-        //   Signin First!
-        // </div>
-        <UsrDashboard />
-      )}
+      {users.length > 0 ? <DevDashboard /> : <UsrDashboard />}
       <Footer />
     </>
   );
