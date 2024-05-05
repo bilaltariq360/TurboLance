@@ -8,10 +8,10 @@ body {
   font-family: "Titillium Web";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url("./img/patternpad.svg");
+  background: url("./img/abstract-dark-blue-scratch-background.jpg");
   background-attachment: fixed;
   background-blend-mode: overlay;
-  background-color: rgba(0, 0, 0, 0.678);
+  background-color: rgba(0, 0, 0, 0);
 }
 
 code {
