@@ -22,7 +22,6 @@ router.get("/Signin", async (req, res) => {
   res.send(users);
 });
 router.get("/DevDashboard", async (req, res) => {
-  console.log(logedin);
   const devAcc = await schemas.DevAcc.find({ email: logedin });
   const users = await schemas.Signup.find({ email: logedin });
   const user = devAcc.map((dev) => {
@@ -32,6 +31,11 @@ router.get("/DevDashboard", async (req, res) => {
     };
   });
   res.send(user);
+});
+router.get("/UsrDashboard", async (req, res) => {
+  const users = await schemas.Signup.find({ email: logedin });
+  console.log(users, users.length);
+  res.send(users);
 });
 router.post("/Otp", async (req, res) => {
   const { email, name, otp } = req.body;
