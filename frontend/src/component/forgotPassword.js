@@ -24,7 +24,7 @@ function ForgotPassword() {
       method: "post",
       url: "/ForgotPassword",
       data: {
-        email: "hafizbilaltariq360@gmail.com",
+        email: email,
       },
     });
   };
