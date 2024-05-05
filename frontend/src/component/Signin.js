@@ -41,10 +41,11 @@ function Signin() {
       const response = await axios.get("/Signin", {
         params: {
           email: email,
+          password: password,
         },
       });
       users = response.data;
-      if (!users) {
+      if (users.length === 0) {
         toast.error("No record found!", {
           position: "bottom-right",
           autoClose: 2000,
@@ -56,16 +57,7 @@ function Signin() {
           theme: "dark",
         });
       } else {
-        navigate("/Dashboard", {
-          state: {
-            data: {
-              fName: users[0].fname,
-              lName: users[0].lname,
-              email: users[0].email,
-              devProfession: users[0].devProfession,
-            },
-          },
-        });
+        navigate("/Dashboard", {});
       }
     }
     e.preventDefault();

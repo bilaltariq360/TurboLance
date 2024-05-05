@@ -5,25 +5,30 @@ const nodemailer = require("nodemailer");
 const schemas = require("../models/schemas");
 const EmailValidator = require("email-deep-validator");
 
-let logedin = "TurboLance";
+let logedin = "@gmail.com";
 
 //const path = require('path');
 
 router.get("/Signin", async (req, res) => {
   const email = req.query.email;
-  const users = await schemas.Signup.find({ email: email });
+  const password = req.query.password;
+  const users = await schemas.Signup.findOne({
+    email: email,
+    password: password,
+  });
   if (users) {
     logedin = email;
   }
   res.send(users);
 });
-router.get("/Dashboard", async (req, res) => {
+router.get("/DevDashboard", async (req, res) => {
+  console.log(logedin);
   const devAcc = await schemas.DevAcc.find({ email: logedin });
   const users = await schemas.Signup.find({ email: logedin });
-  const user = devAcc.map((dev, index) => {
+  const user = devAcc.map((dev) => {
     return {
       ...dev.toObject(),
-      ...users[index].toObject(),
+      ...users[0].toObject(),
     };
   });
   res.send(user);
@@ -185,19 +190,28 @@ router.post("/ForgotPassword", async (req, res) => {
 });
 
 router.get("/Gigs", async (req, res) => {
-  const dev = await schemas.DevAcc.find({});
-  const user = dev.map(async (dev) => {
-    const devDetail = await schemas.Signup.find({ email: dev.email });
-    return {
-      ...dev.toObject(),
-      fname: devDetail[0].fname,
-      lname: devDetail[0].lname,
-    };
-  });
-  res.send(user);
+  try {
+    const dev = await schemas.DevAcc.find({});
+    const user = await Promise.all(
+      dev.map(async (devItem) => {
+        const devDetail = await schemas.Signup.findOne({
+          email: devItem.email,
+        });
+        return {
+          ...devItem.toObject(),
+          ...devDetail.toObject(),
+          ...devDetail.toObject(),
+        };
+      })
+    );
+    res.send(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
-router.post("/Dashboard", async (req, res) => {
+router.post("/DevDashboard" || "/Dashboard", async (req, res) => {
   const { email, tagline, skill, hourlyRate } = req.body;
   const newDevAcc = new schemas.DevAcc({
     email: email,
