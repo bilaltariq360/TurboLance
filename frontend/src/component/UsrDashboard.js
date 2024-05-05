@@ -24,37 +24,45 @@ function UsrDashboard() {
   };
   return (
     <>
-      <section className="pt-10 h-[100vh] bg-white px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <img
-            src={ProfilePic}
-            className="mx-auto w-24 md:w-32 lg:w-48 rounded-full border-4 border-blue-500"
-          />
-          {users.length > 0 && (
-            <>
-              <h1 className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">
-                {users[0].fname} {users[0].lname}
-              </h1>
-              <p className="text-sm sm:text-lg lg:text-xl text-gray-600">
-                {users[0].email}
-              </p>
-              <div className="flex items-center justify-center">
-                <p className="text-sm sm:text-lg pt-28 pr-3 lg:text-xl">
-                  TurboLance Member since
+      <section className="pt-10 h-[100vh] bg-gray-50 px-4 sm:px-6 lg:px-8">
+        {users.length === 0 ? (
+          <div className="bg-gray-50 px-8 h-[70vh] text-5xl font-bold flex justify-center items-center">
+            Signin First!
+          </div>
+        ) : (
+          <div className="text-center">
+            <img
+              src={ProfilePic}
+              className="mx-auto w-24 md:w-32 lg:w-48 rounded-full border-4 border-blue-500"
+            />
+            {users.length > 0 && (
+              <>
+                <h1 className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">
+                  {users[0].fname} {users[0].lname}
+                </h1>
+                <p className="text-sm sm:text-lg lg:text-xl text-gray-600">
+                  {users[0].email}
                 </p>
-                <p className="text-sm sm:text-lg pt-28 lg:text-xl font-bold">
-                  {formatDate(users[0].entryDate)}
-                </p>
-              </div>
-              <div className="flex items-center justify-center">
-                <p className="text-sm sm:text-lg pr-3 lg:text-xl">
-                  Projects Completed
-                </p>
-                <p className="text-sm sm:text-lg lg:text-xl font-bold">{10}</p>
-              </div>
-            </>
-          )}
-        </div>
+                <div className="flex items-center justify-center">
+                  <p className="text-sm sm:text-lg pt-28 pr-3 lg:text-xl">
+                    TurboLance Member since
+                  </p>
+                  <p className="text-sm sm:text-lg pt-28 lg:text-xl font-bold">
+                    {formatDate(users[0].entryDate)}
+                  </p>
+                </div>
+                <div className="flex items-center justify-center">
+                  <p className="text-sm sm:text-lg pr-3 lg:text-xl">
+                    Projects Completed
+                  </p>
+                  <p className="text-sm sm:text-lg lg:text-xl font-bold">
+                    {10}
+                  </p>
+                </div>
+              </>
+            )}
+          </div>
+        )}
       </section>
     </>
   );
