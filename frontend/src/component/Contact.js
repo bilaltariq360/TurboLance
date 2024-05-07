@@ -59,7 +59,10 @@ const Contact = () => {
       <Navbar />
       <ToastContainer />
       <div className="flex justify-center items-center h-[100vh] sm:pt-2 my-24">
-        <div className="max-w-md w-full px-6 py-8 bg-white shadow-md rounded-lg">
+        <div
+          className="max-w-md w-full px-6 py-8 bg-white shadow-md rounded-lg"
+          style={{ boxShadow: "0px 1px 100px 10px #4a5ea4fe" }}
+        >
           <img
             src={logoimg}
             alt="logo"

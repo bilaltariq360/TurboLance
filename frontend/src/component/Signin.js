@@ -67,7 +67,10 @@ function Signin() {
       <Navbar />
       <ToastContainer />
       <div className="flex justify-center items-center min-h-screen">
-        <div className="max-w-md w-full px-6 py-8 bg-white shadow-md rounded-lg">
+        <div
+          className="max-w-md w-full px-6 py-8 bg-white shadow-md rounded-lg"
+          style={{ boxShadow: "0px 1px 100px 10px #4a5ea4fe" }}
+        >
           <img src={logoim} alt="logo" className="px-14" />
           <h1 className="text-center text-3xl font-bold mt-6 text-gray-800">
             Login
