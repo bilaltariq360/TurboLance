@@ -6,6 +6,8 @@ import { FiSearch } from "react-icons/fi";
 import profilePic from "../img/profile-pic.png";
 import starim from "../img/star.png";
 import androidDeveloper from "../img/gig-background.png";
+import { Link } from "react-router-dom";
+
 
 function Gigs() {
   const [devs, setDevs] = useState([]);
@@ -41,6 +43,7 @@ function Gigs() {
             Search
           </button>
         </div>
+        <Link to="/DevProfile">
         <section className="flex justify-around items-center flex-wrap px-10 py-20">
           {!devs
             ? ""
@@ -93,6 +96,7 @@ function Gigs() {
                 </div>
               ))}
         </section>
+        </Link>
       </div>
       <Footer />
     </>
