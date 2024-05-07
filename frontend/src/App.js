@@ -12,6 +12,7 @@ import Dashboard from "./component/Dashboard";
 import Documentation from "./component/Documentation";
 import Otp from "./component/otp";
 import ForgotPassword from "./component/forgotPassword";
+import DevProfile from "./component/DeveloperProfile"
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/Documentation" element={<Documentation />} />
         <Route path="/Otp" element={<Otp />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
+        <Route path="/DevProfile" element={<DevProfile />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
