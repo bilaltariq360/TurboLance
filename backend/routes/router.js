@@ -4,6 +4,8 @@ const router = express.Router();
 const nodemailer = require("nodemailer");
 const schemas = require("../models/schemas");
 const EmailValidator = require("email-deep-validator");
+const http = require("http");
+const socketIo = require("socket.io");
 
 let logedin = "@gmail.com";
 
@@ -231,3 +233,43 @@ router.post("/DevDashboard" || "/Dashboard", async (req, res) => {
 });
 
 module.exports = router;
+
+
+
+//chat server
+router.get("/Chat", async (req, res) => {
+  const PORT = process.env.PORT || 3000;
+
+  const app = express();
+  const server = http.createServer(app);
+  const io = socketIo(server);
+  
+  // Middleware to parse JSON bodies
+  app.use(express.json());
+  
+  // Handle POST requests to "/api/sendMessage"
+  app.post("/Chat", (req, res) => {
+    const message = req.body.message;
+    console.log("Message received from client:", message);
+  
+    // Emit the received message to all connected clients
+    io.emit("chat message", message);
+  
+    // Respond to the client
+    res.status(200).json({ success: true, message: "Message received and broadcasted" });
+  });
+  
+  // Socket.io connection handling
+  io.on("connection", (socket) => {
+    console.log("A user connected");
+  
+    socket.on("disconnect", () => {
+      console.log("User disconnected");
+    });
+  });
+  
+  // Start the server
+  server.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+});

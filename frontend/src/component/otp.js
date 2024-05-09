@@ -43,7 +43,7 @@ function Otp(props) {
     });
   };
 
-  const notify = async (event) => {
+    const notify = async (event) => {
     event.preventDefault();
     let otp = document.getElementById("otp").value;
 

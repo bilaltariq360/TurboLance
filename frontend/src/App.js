@@ -13,6 +13,7 @@ import Documentation from "./component/Documentation";
 import Otp from "./component/otp";
 import ForgotPassword from "./component/forgotPassword";
 import DevProfile from "./component/DeveloperProfile"
+import Chat from "./component/Chat"
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/Otp" element={<Otp />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/DevProfile" element={<DevProfile />} />
+        <Route path="/Chat" element={<Chat />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
