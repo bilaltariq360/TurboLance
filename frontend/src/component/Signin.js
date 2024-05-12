@@ -68,14 +68,14 @@ function Signin() {
       <ToastContainer />
       <div className="flex justify-center items-center min-h-screen">
         <div
-          className="max-w-md w-full px-6 py-8 bg-white shadow-md rounded-lg"
-          style={{ boxShadow: "0px 1px 100px 10px #4a5ea4fe" }}
+          className="max-w-md w-full px-6 py-8 bg-gray shadow-md rounded-lg"
+          style={{ boxShadow: "0px 1px 500px 10px #142D55" }}
         >
           <img src={logoim} alt="logo" className="px-14" />
-          <h1 className="text-center text-3xl font-bold mt-6 text-gray-800">
+          <h1 className="text-center text-3xl font-bold mt-6 text-gray-300">
             Login
           </h1>
-          <p className="text-center text-gray-600 mt-2">
+          <p className="text-center text-gray-300 mt-2">
             Use your TurboLancer Account
           </p>
           <form className="mt-8 space-y-4" onSubmit={notify}>
@@ -83,7 +83,7 @@ function Signin() {
               <input
                 id="email"
                 type="text"
-                className="border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
+                className="border-2 w-full px-4 py-2 text-gray-300 border-blue-200 bg-transparent rounded-md focus:outline-none focus:border-blue-400 placeholder:text-gray-600"
                 placeholder="Email"
               />
             </div>
@@ -91,7 +91,7 @@ function Signin() {
               <input
                 id="password"
                 type="password"
-                className="border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
+                className="border-2 w-full px-4 py-2 text-gray-300 border-blue-200 bg-transparent rounded-md focus:outline-none focus:border-blue-400 placeholder:text-gray-600"
                 placeholder="Password"
               />
             </div>
@@ -113,7 +113,7 @@ function Signin() {
             </div>
           </form>
           <div className="text-center mt-4">
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-300 text-sm">
               Don't have an account?{" "}
               <Link to="/Signup" className="text-blue-600 hover:underline">
                 Sign up
