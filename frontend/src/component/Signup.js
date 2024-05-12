@@ -88,16 +88,19 @@ function Signup() {
       <Navbar />
       <ToastContainer />
       <div className="flex justify-center items-center min-h-screen my-20">
-        <div className="max-w-md w-full px-6 py-8 bg-white shadow-md rounded-lg">
+        <div
+          className="max-w-md w-full px-6 py-8 shadow-md rounded-lg"
+          style={{ boxShadow: "0px 1px 500px 10px #142D55" }}
+        >
           <img
             src={logoim}
             alt="logo"
             className="flex justify-center items-center px-14"
           />
-          <h1 className="text-center text-3xl font-bold mt-6 pl-5 text-gray-800">
+          <h1 className="text-center text-3xl font-bold mt-6 pl-5 text-gray-300">
             Create new account
           </h1>
-          <p className="text-center text-gray-600 mt-2">
+          <p className="text-center text-gray-300 mt-2">
             Join TurboLance community
           </p>
           <form className="mt-8 space-y-4" onSubmit={notify}>
@@ -105,14 +108,14 @@ function Signup() {
               <input
                 id="firstName"
                 type="text"
-                className="border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
+                className="border-2 w-full px-4 py-2 text-gray-300 border-blue-200 rounded-md focus:outline-none focus:border-blue-400 placeholder:text-gray-600 bg-transparent"
                 placeholder="First Name"
               />
               <div className="px-2"></div>
               <input
                 id="lastName"
                 type="text"
-                className="border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
+                className="border-2 w-full px-4 py-2 text-gray-300 border-blue-200 rounded-md focus:outline-none focus:border-blue-400 placeholder:text-gray-600 bg-transparent"
                 placeholder="Last Name"
               />
             </div>
@@ -120,7 +123,7 @@ function Signup() {
               <input
                 id="email"
                 type="text"
-                className="border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
+                className="border-2 w-full px-4 py-2 text-gray-300 border-blue-200 rounded-md focus:outline-none focus:border-blue-400 placeholder:text-gray-600 bg-transparent"
                 placeholder="Email"
               />
             </div>
@@ -128,7 +131,7 @@ function Signup() {
               <input
                 id="password"
                 type="password"
-                className="border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
+                className="border-2 w-full px-4 py-2 text-gray-300 border-blue-200 rounded-md focus:outline-none focus:border-blue-400 placeholder:text-gray-600 bg-transparent"
                 placeholder="Password"
               />
             </div>
@@ -136,7 +139,7 @@ function Signup() {
               <input
                 id="confirm-password"
                 type="password"
-                className="border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
+                className="border-2 w-full px-4 py-2 text-gray-300 border-blue-200 rounded-md focus:outline-none focus:border-blue-400 placeholder:text-gray-600 bg-transparent"
                 placeholder="Confirm Password"
               />
             </div>
@@ -147,9 +150,12 @@ function Signup() {
                   type="radio"
                   id="client"
                   name="userType"
-                  className="cursor-pointer appearance-none border-2 border-gray-300 rounded-full w-6 h-6 checked:bg-blue-800 checked:border-transparent focus:outline-none"
+                  className="cursor-pointer appearance-none border-2 border-blue-200 rounded-full w-6 h-6 checked:bg-blue-800 checked:border-transparent focus:outline-none"
                 />
-                <label htmlFor="client" className="pl-3 cursor-pointer">
+                <label
+                  htmlFor="client"
+                  className="pl-3 cursor-pointer text-gray-300"
+                >
                   Join as a client
                 </label>
               </div>
@@ -159,9 +165,12 @@ function Signup() {
                   type="radio"
                   id="developer"
                   name="userType"
-                  className="cursor-pointer appearance-none border-2 border-gray-300 rounded-full w-6 h-6 checked:bg-blue-800 checked:border-transparent focus:outline-none"
+                  className="cursor-pointer appearance-none border-2 border-blue-200 rounded-full w-6 h-6 checked:bg-blue-800 checked:border-transparent focus:outline-none"
                 />
-                <label htmlFor="developer" className="pl-3 cursor-pointer">
+                <label
+                  htmlFor="developer"
+                  className="pl-3 cursor-pointer text-gray-300"
+                >
                   Join as a developer
                 </label>
               </div>
@@ -173,7 +182,7 @@ function Signup() {
                 <input
                   id="career"
                   type="text"
-                  className="border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
+                  className="border-2 w-full px-4 py-2 text-gray-300 border-blue-200 rounded-md focus:outline-none focus:border-blue-400 placeholder:text-gray-600 bg-transparent"
                   placeholder="Career/Profession"
                 />
               </div>
@@ -190,7 +199,7 @@ function Signup() {
             </div>
           </form>
           <div className="text-center mt-4">
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-300 text-sm">
               Already have an account?{" "}
               <Link to="/Signin" className="text-blue-600 hover:underline">
                 Signin

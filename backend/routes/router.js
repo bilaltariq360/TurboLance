@@ -5,9 +5,14 @@ const nodemailer = require("nodemailer");
 const schemas = require("../models/schemas");
 const EmailValidator = require("email-deep-validator");
 
-let logedin = "@gmail.com";
+let logedin = "TurboLance";
 
 //const path = require('path');
+router.get("/DeveloperProfile", async (req, res) => {
+  const testParam = req.query.test;
+  console.log(testParam); // Should print "sss" to the console
+  res.send("Response from backend");
+});
 
 router.get("/Signin", async (req, res) => {
   const email = req.query.email;
