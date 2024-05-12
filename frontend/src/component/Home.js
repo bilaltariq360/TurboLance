@@ -15,7 +15,6 @@ function Home() {
   return (
     <>
       <Navbar />
-
       <section className="flex flex-col items-center justify-center h-[94vh] px-10 lg:flex-row lg:justify-between">
         <img src={Bgim} className="w-[18rem] md:w-[25rem] lg:mt-0" />
         <div>
@@ -157,7 +156,6 @@ function Home() {
           <img src={pic1im} className="w-[80vw] mt-14 lg:w-[30vw] rounded-md" />
         </div>
       </section>
-
       <Footer />
     </>
   );
