@@ -5,6 +5,8 @@ import ProfilePic from "../img/profile-pic.svg";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { MdLightMode } from "react-icons/md";
 import { Link } from "react-router-dom";
+import ProfileMenu from './ProfileDropDown'
+
 
 function Navbar() {
   const [isMobileNavVisible, setMobileNavVisibility] = useState(false);
@@ -50,11 +52,10 @@ function Navbar() {
             <div className="flex items-center text-blue-900">
               <MdLightMode className="text-2xl cursor-pointer hover:animate-spin" />
             </div>
-            <Link to="/Dashboard">
-              <div className="flex items-center text-blue-900 cursor-pointer">
-                <img src={ProfilePic} className="w-[3.5rem]" />
-              </div>
-            </Link>
+           
+                <ProfileMenu />
+              
+            
             <div>
               <Link to="/Signin">
                 <button className="bg-white text-blue-900 mx-[0.3rem] w-[6.5rem] py-[0.3rem] border-blue-800 border-[0.13rem] rounded-md font-semibold hover:bg-slate-100 duration-300">
