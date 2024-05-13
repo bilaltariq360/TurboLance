@@ -59,24 +59,27 @@ const Contact = () => {
       <Navbar />
       <ToastContainer />
       <div className="flex justify-center items-center h-[100vh] sm:pt-2 my-24">
-        <div className="max-w-md w-full px-6 py-8 bg-white shadow-md rounded-lg">
+        <div
+          className="max-w-md w-full px-6 py-8 shadow-md rounded-lg"
+          style={{ boxShadow: "0px 1px 500px 10px #142D55" }}
+        >
           <img
             src={logoimg}
             alt="logo"
             className="flex justify-center items-center px-14"
           />
           <div>
-            <h1 className="text-center text-3xl font-bold mt-6 text-gray-800">
+            <h1 className="text-center text-3xl font-bold mt-6 text-gray-300">
               Contact Us
             </h1>
-            <p className="text-center pt-1">We're here for you</p>
+            <p className="text-center pt-1 text-gray-300">We're here for you</p>
           </div>
           <form className="mt-8 space-y-4" onSubmit={notify}>
             <div>
               <input
                 id="name"
                 type="text"
-                className="border-gray-300 border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
+                className="border-blue-200 bg-transparent text-gray-300 border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
                 placeholder="Full Name"
               />
             </div>
@@ -85,7 +88,7 @@ const Contact = () => {
               <input
                 id="email"
                 type="email"
-                className="border-gray-300 border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
+                className="border-blue-200 bg-transparent text-gray-300 border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
                 placeholder="Email"
               />
             </div>
@@ -93,7 +96,7 @@ const Contact = () => {
               <input
                 id="subject"
                 type="text"
-                className="border-gray-300 border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
+                className="border-blue-200 bg-transparent text-gray-300 border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
                 placeholder="Subject"
               />
             </div>
@@ -101,7 +104,7 @@ const Contact = () => {
               <textarea
                 id="msg"
                 rows="5"
-                className="border-gray-300 border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400 resize-none"
+                className="border-blue-200 bg-transparent text-gray-300 border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400 resize-none"
                 placeholder="Message"
               ></textarea>
             </div>
@@ -115,7 +118,7 @@ const Contact = () => {
             </div>
           </form>
           <div className="text-center mt-4">
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-300 text-sm">
               We'll get back to you as soon as possible.
             </p>
           </div>

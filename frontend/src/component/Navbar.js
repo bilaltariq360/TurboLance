@@ -15,11 +15,11 @@ function Navbar() {
 
   return (
     <>
-      <nav className="bg-white py-4 px-10 lg:block hidden sticky top-0 drop-shadow-lg z-50">
+      <nav className="bg-white py-2 px-8 lg:block hidden sticky top-0 drop-shadow-lg z-50">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <Link to="/" className="cursor-pointer">
-              <img src={logoimg} alt="img" className="w-[12rem]"></img>
+            <Link to="/DevProposals" className="cursor-pointer">
+              <img src={logoimg} alt="img" className="w-[10rem]"></img>
             </Link>
           </div>
           <ul className="flex items-center space-x-8">
@@ -71,11 +71,11 @@ function Navbar() {
         </div>
       </nav>
       <div className="lg:hidden sticky top-0">
-        <nav className="bg-white py-4 px-10 sticky top-0 drop-shadow-lg">
+        <nav className="bg-white py-2 px-5 sticky top-0 drop-shadow-lg">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <Link to="/">
-                <img src={logoimg} alt="img" className="w-[12rem]" />
+                <img src={logoimg} alt="img" className="w-[10rem]" />
               </Link>
             </div>
             <div className="flex items-center text-blue-900">

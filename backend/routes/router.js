@@ -7,9 +7,14 @@ const EmailValidator = require("email-deep-validator");
 const http = require("http");
 const socketIo = require("socket.io");
 
-let logedin = "@gmail.com";
+let logedin = "TurboLance";
 
 //const path = require('path');
+router.get("/DeveloperProfile", async (req, res) => {
+  const testParam = req.query.test;
+  console.log(testParam); // Should print "sss" to the console
+  res.send("Response from backend");
+});
 
 router.get("/Signin", async (req, res) => {
   const email = req.query.email;
@@ -206,7 +211,7 @@ router.get("/Gigs", async (req, res) => {
         return {
           ...devItem.toObject(),
           ...devDetail.toObject(),
-          ...devDetail.toObject(),
+          logedin: logedin,
         };
       })
     );
