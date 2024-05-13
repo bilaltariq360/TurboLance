@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "./Navbar";
+import { Link } from "react-router-dom";
 
 function DevProposals() {
   return (
@@ -7,11 +8,13 @@ function DevProposals() {
       <Navbar />
       <div className="flex space-x-4 py-6 px-2 pl-10">
       <div class="relative inline-flex">
+        <Link to="/ProposalDashboard">
   <button
     class="align-middle select-none font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none py-3 px-6 rounded-lg bg-blue-900 text-white shadow-md active:opacity-[0.85] active:shadow-none"
     type="button">
-    Accepted
+    view History
   </button>
+  </Link>
   <span
     class="absolute rounded-full py-1 px-1 text-xs font-medium content-[''] leading-none grid place-items-center top-[4%] right-[2%] translate-x-2/4 -translate-y-2/4 bg-red-500 text-white min-w-[24px] min-h-[24px]">
     5
@@ -19,17 +22,7 @@ function DevProposals() {
 </div>
 
 
-<div class="relative inline-flex">
-  <button
-    class="align-middle select-none font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none py-3 px-6 rounded-lg bg-yellow-500 text-gray-800 shadow-md focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
-    type="button">
-    completed
-  </button>
-  <span
-    class="absolute rounded-full py-1 px-1 text-xs font-medium content-[''] leading-none grid place-items-center top-[4%] right-[2%] translate-x-2/4 -translate-y-2/4 bg-red-500 text-white min-w-[24px] min-h-[24px]">
-    5
-  </span>
-</div>
+
 </div>
       <div className="max-w-5xl bg-white rounded-lg shadow-md overflow-hidden mx-auto my-16">
         <div className="px-6 py-4">

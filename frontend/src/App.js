@@ -15,7 +15,8 @@ import ForgotPassword from "./component/forgotPassword";
 import DevProfile from "./component/DeveloperProfile";
 import UsrDashboard from "./component/UsrDashboard";
 import DevProposals from "./component/DevProposals";
-import ProfileMenu from "./component/ProfileDropDown"
+import ProfileMenu from "./component/ProfileDropDown";
+import ProposalDashboard from "./component/ProposalDashboard";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/Otp" element={<Otp />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/DeveloperProfile" element={<DevProfile />} />
+        <Route path="/ProposalDashboard" element={<ProposalDashboard />} />
         <Route path="/profilemenu" element={<ProfileMenu />} />
         <Route path="*" element={<Error />} />
       </Routes>
