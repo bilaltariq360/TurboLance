@@ -5,6 +5,7 @@ import starim from "../img/star.png";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import axios from "axios";
+import { Textarea, Button, IconButton } from "@material-tailwind/react";
 
 function DevProfile() {
   const location = useLocation();
@@ -151,17 +152,21 @@ function DevProfile() {
               </svg>
               {getTruncatedFileName()}
             </label>
-            {selectedFile && (
-              <button
-                onClick={handleUpload}
-                className="bg-blue-500 ml-2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              >
-                Send to developer
-              </button>
-            )}
           </div>
         </div>
       </div>
+      <div className="flex flex-col justify-center items-center">
+        <div className="w-[40rem]">
+          <Textarea color="green" label="Textarea" className="text-white" />
+        </div>
+        <button
+          onClick={handleUpload}
+          className="mb-20 bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-10 mt-5 rounded transition duration-300 ease-in-out  ml-4"
+        >
+          Send to developer
+        </button>
+      </div>
+
       <Footer />
     </>
   );
