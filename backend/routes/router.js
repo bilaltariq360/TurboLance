@@ -209,7 +209,7 @@ router.get("/Gigs", async (req, res) => {
         return {
           ...devItem.toObject(),
           ...devDetail.toObject(),
-          ...devDetail.toObject(),
+          logedin: logedin,
         };
       })
     );

@@ -13,6 +13,8 @@ import Documentation from "./component/Documentation";
 import Otp from "./component/otp";
 import ForgotPassword from "./component/forgotPassword";
 import DevProfile from "./component/DeveloperProfile";
+import UsrDashboard from "./component/UsrDashboard";
+import DevProposals from "./component/DevProposals";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
         <Route path="/Signup" element={<Signup />} />
         <Route path="/Signin" element={<Signin />} />
         <Route path="/Dashboard" element={<Dashboard />} />
+        <Route path="/UsrDashboard" element={<UsrDashboard />} />
+        <Route path="/DevProposals" element={<DevProposals />} />
         <Route path="/Contact" element={<Contact />} />
         <Route path="Footer" element={<Footer />} />
         <Route path="/Documentation" element={<Documentation />} />

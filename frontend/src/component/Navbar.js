@@ -18,7 +18,7 @@ function Navbar() {
       <nav className="bg-white py-2 px-8 lg:block hidden sticky top-0 drop-shadow-lg z-50">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <Link to="/" className="cursor-pointer">
+            <Link to="/DevProposals" className="cursor-pointer">
               <img src={logoimg} alt="img" className="w-[10rem]"></img>
             </Link>
           </div>
