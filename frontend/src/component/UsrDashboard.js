@@ -27,8 +27,8 @@ function UsrDashboard() {
     <>
       <section className="pt-10 h-[100vh] bg-gray-50 px-4 sm:px-6 lg:px-8">
         {users.length === 0 ? (
-          <div className="flex justify-evenly">
-            <img src={Signin} className="w-[80vh]" />
+          <div className="flex justify-evenly items-center">
+            <img src={Signin} className="w-[30%] h-[30%]" />
             <div className="bg-gray-50 px-8 h-[70vh] text-5xl font-bold flex justify-center items-center">
               Signin First!
             </div>

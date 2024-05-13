@@ -59,7 +59,11 @@ function Gigs() {
               : devs.map((dev, index) => (
                   <Link
                     key={index}
-                    to={`/DeveloperProfile?fname=${dev.fname}&lname=${dev.lname}&tagline=${dev.tagline}&hourlyRate=${dev.hourlyRate}&skills=${dev.skills}`}
+                    to={
+                      dev.logedin === "TurboLance"
+                        ? `/UsrDashboard`
+                        : `/DeveloperProfile?fname=${dev.logedin}&lname=${dev.lname}&tagline=${dev.tagline}&hourlyRate=${dev.hourlyRate}&skills=${dev.skills}`
+                    }
                   >
                     <div className="bg-white cursor-pointer w-[20rem] h-[28rem] rounded-md ml-1 mr-1 mt-10 shadow-lg">
                       <img
