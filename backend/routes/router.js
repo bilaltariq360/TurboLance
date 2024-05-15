@@ -13,7 +13,14 @@ router.get("/DeveloperProfile", async (req, res) => {
   console.log(testParam); // Should print "sss" to the console
   res.send("Response from backend");
 });
-
+router.get("/DevProposals", async (req, res) => {
+  const param = req.query.demail;
+  const proposals = await schemas.Proposal.find({ demail: param });
+  res.send(proposals);
+});
+router.get("/GetEmail", async (req, res) => {
+  res.send(logedin);
+});
 router.get("/Signin", async (req, res) => {
   const email = req.query.email;
   const password = req.query.password;
@@ -234,5 +241,18 @@ router.post("/DevDashboard" || "/Dashboard", async (req, res) => {
   else res.send("404");
   res.end();
 });
+router.post("/DeveloperProfile", async (req, res) => {
+  const { cemail, demail, cpdescription } = req.body;
+  console.log("OK");
+  const newSignup = new schemas.Proposal({
+    cemail: cemail,
+    demail: demail,
+    cpdescription: cpdescription,
+  });
+  const saveSignup = await newSignup.save();
 
+  if (saveSignup) res.send("200");
+  else res.send("404");
+  res.end();
+});
 module.exports = router;

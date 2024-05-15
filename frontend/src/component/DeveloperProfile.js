@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import profilePic from "../img/profile-pic.png";
+import { ToastContainer, toast } from "react-toastify";
 import starim from "../img/star.png";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import axios from "axios";
-import { Textarea, Button, IconButton } from "@material-tailwind/react";
+import { Textarea } from "@material-tailwind/react";
 
 function DevProfile() {
   const location = useLocation();
@@ -18,6 +19,8 @@ function DevProfile() {
   const tagline = params.get("tagline");
   const hourlyRate = params.get("hourlyRate");
   const skillsString = params.get("skills");
+  const cemail = params.get("logedin");
+  const demail = params.get("email");
   const skills = skillsString ? skillsString.split(",") : [];
 
   useEffect(() => {
@@ -47,16 +50,6 @@ function DevProfile() {
     setSelectedFile(event.target.files[0]);
   };
 
-  const handleUpload = () => {
-    if (!selectedFile) {
-      alert("Please select a file first.");
-      return;
-    }
-
-    // Here you can handle the file upload. For example, you can send the file to a server.
-    alert(`File ${selectedFile.name} is ready to be uploaded.`);
-  };
-
   const getTruncatedFileName = () => {
     if (selectedFile) {
       return selectedFile.name.length > 12
@@ -65,10 +58,48 @@ function DevProfile() {
     }
     return "Select File";
   };
+  const notify = async (event) => {
+    event.preventDefault();
+    let Projectdescription =
+      document.getElementById("Projectdescription").value;
 
+    if (Projectdescription !== "") {
+      toast.success("Project proposal sent successfully!", {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      await axios({
+        method: "post",
+        url: "/DeveloperProfile",
+        data: {
+          cemail: cemail,
+          demail: demail,
+          cpdescription: Projectdescription,
+        },
+      });
+    } else {
+      toast.error("Enter project description!", {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  };
   return (
     <>
       <Navbar />
+      <ToastContainer />
       <div className="flex flex-col md:flex-row items-center justify-center md:justify-evenly py-24">
         {
           <div className="bg-gray-50 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col my-2 w-full md:w-3/4 lg:w-1/2">
@@ -157,10 +188,15 @@ function DevProfile() {
       </div>
       <div className="flex flex-col justify-center items-center">
         <div className="w-[40rem]">
-          <Textarea color="green" label="Textarea" className="text-white" />
+          <Textarea
+            id="Projectdescription"
+            color="green"
+            label="Project Description"
+            className="text-white"
+          />
         </div>
         <button
-          onClick={handleUpload}
+          onClick={notify}
           className="mb-20 bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-10 mt-5 rounded transition duration-300 ease-in-out  ml-4"
         >
           Send to developer

@@ -20,9 +20,18 @@ const devAccSchema = new Schema({
   entryDate: { type: Date, default: Date.now },
 });
 
+const proposalSchema = new Schema({
+  cemail: { type: String },
+  demail: { type: String },
+  cpdescription: { type: String },
+  entryDate: { type: Date, default: Date.now },
+  completedDate: { type: Date, default: Date.now },
+});
+
 const Signup = mongoose.model("Signup", signupSchema, "signup_accounts");
 const DevAcc = mongoose.model("DevAcc", devAccSchema, "dev_acc");
+const Proposal = mongoose.model("Proposal", proposalSchema, "dev_proposal");
 
-const mySchemas = { Signup: Signup, DevAcc: DevAcc };
+const mySchemas = { Signup: Signup, DevAcc: DevAcc, Proposal: Proposal };
 
 module.exports = mySchemas;
