@@ -40,6 +40,40 @@ function DevProposals() {
     }
   };
 
+  const updateStatus = async () => {
+    setShowSpinner(true);
+    try {
+      const response = await axios.post("/DevProposalStatusUpdate", {
+        cemail: proposals[0].cemail,
+        demail: email,
+        cpdescription: proposals[0].cpdescription,
+      });
+      fetchEmail();
+      setTimeout(() => {
+        setShowSpinner(false);
+      }, 1000);
+    } catch (error) {
+      console.error("Error updating proposal:", error);
+    }
+  };
+
+  const deleteProposal = async () => {
+    setShowSpinner(true);
+    try {
+      const response = await axios.post("/DevProposalDelete", {
+        cemail: proposals[0].cemail,
+        demail: email,
+        cpdescription: proposals[0].cpdescription,
+      });
+      fetchEmail();
+      setTimeout(() => {
+        setShowSpinner(false);
+      }, 1000);
+    } catch (error) {
+      console.error("Error deleting proposal:", error);
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -65,10 +99,16 @@ function DevProposals() {
                 <p className="text-gray-700">{proposal.cpdescription}</p>
               </div>
               <div className="px-6 py-4 bg-gray-100 border-t border-gray-200 flex justify-center">
-                <button className="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out ">
+                <button
+                  onClick={updateStatus}
+                  className="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out "
+                >
                   Accept
                 </button>
-                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-10 rounded transition duration-300 ease-in-out  ml-4">
+                <button
+                  onClick={deleteProposal}
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-10 rounded transition duration-300 ease-in-out  ml-4"
+                >
                   Decline
                 </button>
               </div>
@@ -76,7 +116,7 @@ function DevProposals() {
           </div>
         ))
       ) : (
-        <div className="text-center font-bold text-3xl bg-red-400 py-5 mt-10">
+        <div className="text-center font-bold text-3xl bg-yellow-600 py-5 mt-10">
           No proposals found!
         </div>
       )}

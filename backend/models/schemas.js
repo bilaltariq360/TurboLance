@@ -24,6 +24,7 @@ const proposalSchema = new Schema({
   cemail: { type: String },
   demail: { type: String },
   cpdescription: { type: String },
+  pstatus: { type: String, default: "pending" },
   entryDate: { type: Date, default: Date.now },
   completedDate: { type: Date, default: Date.now },
 });
