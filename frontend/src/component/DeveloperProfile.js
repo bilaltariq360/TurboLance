@@ -26,8 +26,6 @@ function DevProfile() {
   useEffect(() => {
     if (location.state && location.state.dev) {
       setDev(location.state.dev);
-    } else {
-      // Handle the case when location.state or location.state.dev is undefined
     }
 
     async function fetchData() {
@@ -79,6 +77,8 @@ function DevProfile() {
         url: "/DeveloperProfile",
         data: {
           cemail: cemail,
+          cfname: fname,
+          clname: lname,
           demail: demail,
           cpdescription: Projectdescription,
         },

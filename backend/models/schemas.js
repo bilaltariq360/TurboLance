@@ -22,6 +22,8 @@ const devAccSchema = new Schema({
 
 const proposalSchema = new Schema({
   cemail: { type: String },
+  cfname: { type: String },
+  clname: { type: String },
   demail: { type: String },
   cpdescription: { type: String },
   pstatus: { type: String, default: "pending" },

@@ -14,6 +14,7 @@ router.get("/DeveloperProfile", async (req, res) => {
 });
 router.get("/DevProposals", async (req, res) => {
   const param = req.query.demail;
+
   const proposals = await schemas.Proposal.find({
     demail: param,
     pstatus: "pending",
@@ -243,9 +244,11 @@ router.post("/DevDashboard" || "/Dashboard", async (req, res) => {
   res.end();
 });
 router.post("/DeveloperProfile", async (req, res) => {
-  const { cemail, demail, cpdescription } = req.body;
+  const { cemail, cfname, clname, demail, cpdescription } = req.body;
   const newSignup = new schemas.Proposal({
     cemail: cemail,
+    cfname: cfname,
+    clname: clname,
     demail: demail,
     cpdescription: cpdescription,
   });

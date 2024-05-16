@@ -94,7 +94,7 @@ function DevProposals() {
             <div className="border-t border-gray-200">
               <div className="px-6 py-4">
                 <h2 className="text-3xl font-bold text-gray-800">
-                  {proposal.cemail}
+                  {proposal.cfname + " " + proposal.clname}
                 </h2>
                 <p className="text-gray-700">{proposal.cpdescription}</p>
               </div>
