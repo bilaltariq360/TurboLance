@@ -3,7 +3,6 @@ const bcrypt = require("bcryptjs");
 const router = express.Router();
 const nodemailer = require("nodemailer");
 const schemas = require("../models/schemas");
-const EmailValidator = require("email-deep-validator");
 
 let logedin = "TurboLance";
 
@@ -11,6 +10,23 @@ let logedin = "TurboLance";
 router.get("/DeveloperProfile", async (req, res) => {
   const testParam = req.query.test;
   res.send("Response from backend");
+});
+router.get("/WorkingProposals", async (req, res) => {
+  const demail = req.query.demail;
+  const cemail = req.query.cemail;
+  const cpdescription = req.query.cpdescription;
+
+  const multiResult = await schemas.Proposal.updateMany(
+    { demail: demail, cemail: cemail, cpdescription: cpdescription }, // Filter
+    {
+      $set: {
+        pstatus: "completed",
+        completedDate: Date.now(),
+      },
+    } // Update
+  );
+
+  res.send.status(200);
 });
 router.get("/DevProposalsCompleted", async (req, res) => {
   const param = req.query.demail;
