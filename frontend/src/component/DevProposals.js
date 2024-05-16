@@ -90,7 +90,7 @@ function DevProposals() {
         <div>
           <div className="flex space-x-4 py-6 px-2 pl-10">
             <div class="relative inline-flex">
-              <Link to="/ProposalDashboard">
+              <Link to="/WorkingProposals">
                 <button
                   class="align-middle select-none font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none py-3 px-6 rounded-lg bg-blue-900 text-white shadow-md active:opacity-[0.85] active:shadow-none"
                   type="button"
