@@ -26,7 +26,7 @@ function DevProposals() {
 
   const fetchData = async (email) => {
     try {
-      const response = await axios.get("/DevProposals", {
+      const response = await axios.get("/DevProposalsPending", {
         params: {
           demail: email,
         },
