@@ -253,17 +253,34 @@ router.get("/Gigs", async (req, res) => {
 
 router.post("/DevDashboard" || "/Dashboard", async (req, res) => {
   const { email, tagline, skill, hourlyRate } = req.body;
-  const newDevAcc = new schemas.DevAcc({
+  const devAcc = await schemas.DevAcc.findOne({
     email: email,
-    tagline: tagline,
-    skills: skill,
-    hourlyRate: hourlyRate,
   });
-  const saveDevAcc = await newDevAcc.save();
+  if (!devAcc) {
+    const newDevAcc = new schemas.DevAcc({
+      email: email,
+      tagline: tagline,
+      skills: skill,
+      hourlyRate: hourlyRate,
+    });
+    const saveDevAcc = await newDevAcc.save();
 
-  if (saveDevAcc) res.send("200");
-  else res.send("404");
-  res.end();
+    if (saveDevAcc) res.send("200");
+    else res.send("404");
+    res.end();
+  } else {
+    const multiResult = await schemas.DevAcc.updateMany(
+      { email: email }, // Filter
+      {
+        $set: {
+          email: email,
+          tagline: tagline,
+          skill: skill,
+          hourlyRate: hourlyRate,
+        },
+      } // Update
+    );
+  }
 });
 router.post("/DeveloperProfile", async (req, res) => {
   const { cemail, cfname, clname, demail, cpdescription } = req.body;

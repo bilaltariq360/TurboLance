@@ -34,8 +34,11 @@ function ForgotPassword() {
       <Navbar />
       <ToastContainer />
       <div className="flex justify-center items-center min-h-screen">
-        <div className="max-w-md w-full px-6 py-8 bg-white shadow-md rounded-lg">
-          <h1 className="text-center text-3xl font-bold mt-6 text-gray-800">
+        <div
+          className="max-w-md w-full px-6 py-8 shadow-md rounded-lg"
+          style={{ boxShadow: "0px 1px 500px 10px #142D55" }}
+        >
+          <h1 className="text-center text-3xl font-bold mt-6 text-gray-300">
             Forgot Password
           </h1>
           <form className="mt-8 space-y-4" onSubmit={handleSubmit}>
@@ -44,7 +47,7 @@ function ForgotPassword() {
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
+                className="border-blue-200 bg-transparent placeholder:text-gray-600 border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
                 placeholder="Email"
               />
             </div>

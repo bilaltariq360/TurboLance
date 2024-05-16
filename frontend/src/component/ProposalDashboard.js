@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { Spinner } from "@material-tailwind/react";
 import axios from "axios";
 
 const ProposalCard = ({
@@ -16,7 +17,7 @@ const ProposalCard = ({
       <p className="text-sm font-semibold text-red-500">
         Accepted: {acceptedDate}
       </p>
-      {completedDate != acceptedDate ? (
+      {completedDate !== acceptedDate ? (
         <p className="text-sm text-green-500 font-semibold">
           Completed: {completedDate}
         </p>
@@ -31,9 +32,13 @@ const ProposalDashboard = () => {
   const [acceptedProposals, setacceptedProposals] = useState([]);
   const [completedProposals, setcompletedProposals] = useState([]);
   const [email, setEmail] = useState("");
+  const [showSpinner, setShowSpinner] = useState(true);
 
   useEffect(() => {
     fetchEmail();
+    setTimeout(() => {
+      setShowSpinner(false);
+    }, 1000);
   }, []);
 
   const fetchEmail = async () => {
@@ -71,43 +76,49 @@ const ProposalDashboard = () => {
   return (
     <>
       <Navbar />
-      <div className="flex justify-center items-center mt-10">
-        <div className="flex flex-col items-center">
-          <div className=" flex justify-between mx-10">
-            {/* Accepted acceptedProposals */}
-            <div className="w-[40vw]">
-              <h2 className="text-xl font-semibold mb-4 bg-blue-500 rounded p-5 text-white">
-                Accepted Proposals
-              </h2>
-              {acceptedProposals.map((proposal, index) => (
-                <ProposalCard
-                  key={index}
-                  clientName={proposal.cfname + " " + proposal.clname}
-                  proposalDescription={proposal.cpdescription}
-                  acceptedDate={proposal.entryDate}
-                  completedDate={proposal.completedDate}
-                />
-              ))}
-            </div>
-            <div className="w-[10vw]"></div>
-            {/* Completed acceptedProposals */}
-            <div className="w-[40vw]">
-              <h2 className="text-xl font-semibold mb-4 bg-green-500 rounded p-5 text-white">
-                Completed Proposals
-              </h2>
-              {completedProposals.map((proposal, index) => (
-                <ProposalCard
-                  key={index}
-                  clientName={proposal.cfname + " " + proposal.clname}
-                  proposalDescription={proposal.cpdescription}
-                  acceptedDate={proposal.entryDate}
-                  completedDate={proposal.completedDate}
-                />
-              ))}
+      {showSpinner ? (
+        <div className="flex items-center justify-center h-[90vh]">
+          <Spinner className="h-12 w-12" color="black" />
+        </div>
+      ) : (
+        <div className="flex justify-center items-center mt-10 mb-20">
+          <div className="flex flex-col items-center">
+            <div className=" flex justify-between mx-10">
+              {/* Accepted acceptedProposals */}
+              <div className="w-[40vw]">
+                <h2 className="text-xl font-semibold mb-4 bg-blue-500 rounded p-5 text-white">
+                  Accepted Proposals
+                </h2>
+                {acceptedProposals.map((proposal, index) => (
+                  <ProposalCard
+                    key={index}
+                    clientName={proposal.cfname + " " + proposal.clname}
+                    proposalDescription={proposal.cpdescription}
+                    acceptedDate={proposal.entryDate}
+                    completedDate={proposal.completedDate}
+                  />
+                ))}
+              </div>
+              <div className="w-[10vw]"></div>
+              {/* Completed acceptedProposals */}
+              <div className="w-[40vw]">
+                <h2 className="text-xl font-semibold mb-4 bg-green-500 rounded p-5 text-white">
+                  Completed Proposals
+                </h2>
+                {completedProposals.map((proposal, index) => (
+                  <ProposalCard
+                    key={index}
+                    clientName={proposal.cfname + " " + proposal.clname}
+                    proposalDescription={proposal.cpdescription}
+                    acceptedDate={proposal.entryDate}
+                    completedDate={proposal.completedDate}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
       <Footer />
     </>
   );
