@@ -90,23 +90,26 @@ function Otp(props) {
       <Navbar />
       <ToastContainer />
       <div className="flex justify-center items-center min-h-screen my-20">
-        <div className="max-w-md w-full px-6 py-8 bg-white shadow-md rounded-lg">
+        <div
+          className="max-w-md w-full px-6 py-8 shadow-md rounded-lg"
+          style={{ boxShadow: "0px 1px 500px 10px #142D55" }}
+        >
           <img
             src={logoim}
             alt="logo"
             className="flex justify-center items-center px-14"
           />
-          <h1 className="text-center text-3xl font-bold mt-6 pl-5 text-gray-800">
+          <h1 className="text-center text-3xl font-bold mt-6 pl-5 text-gray-300">
             Verify your account
           </h1>
-          <p className="text-center text-ellipsis overflow-clip text-gray-600 mt-2">
+          <p className="text-center text-ellipsis overflow-clip text-gray-300 mt-2">
             OTP sent to <span className="font-bold">{data.email}</span>
           </p>
           <form className="mt-8 space-y-4" onSubmit={notify}>
             <div>
               <input
                 type="text"
-                className="border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
+                className="border-blue-200 bg-transparent placeholder:text-gray-600 border-2 w-full px-4 py-2 rounded-md focus:outline-none focus:border-blue-400"
                 placeholder="6 digit OTP"
                 id="otp"
               />
