@@ -1,15 +1,22 @@
 import React, { useState } from "react";
 import ProfilePic from "../img/profile-pic.svg";
 import Dashboard from "./Dashboard";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function ProfileMenu() {
+  const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
 
+  const signout = async () => {
+    await axios.get("/Signout");
+
+    navigate("/Signin", {});
+  };
   return (
     <>
       <img
@@ -68,13 +75,16 @@ function ProfileMenu() {
                 fill="#90A4AE"
               ></path>
             </svg>
-            <p className="block text-sm antialiased font-medium leading-normal text-inherit">
-              Edit Profile
-            </p>
+            <Link to="/DevProposals">
+              <p className="block text-sm antialiased font-medium leading-normal text-inherit">
+                My Proposals
+              </p>
+            </Link>
           </button>
 
           <hr className="my-2 border-blue-gray-50" role="menuitem" />
           <button
+            onClick={signout}
             role="menuitem"
             className="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
           >

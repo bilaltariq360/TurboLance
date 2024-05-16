@@ -1,6 +1,7 @@
-import React from "react";
+import { React, useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import axios from "axios";
 
 const ProposalCard = ({
   clientName,
@@ -15,7 +16,7 @@ const ProposalCard = ({
       <p className="text-sm font-semibold text-red-500">
         Accepted: {acceptedDate}
       </p>
-      {completedDate ? (
+      {completedDate != acceptedDate ? (
         <p className="text-sm text-green-500 font-semibold">
           Completed: {completedDate}
         </p>
@@ -27,80 +28,82 @@ const ProposalCard = ({
 };
 
 const ProposalDashboard = () => {
+  const [acceptedProposals, setacceptedProposals] = useState([]);
+  const [completedProposals, setcompletedProposals] = useState([]);
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    fetchEmail();
+  }, []);
+
+  const fetchEmail = async () => {
+    try {
+      const response = await axios.get("/GetEmail");
+      setEmail(response.data);
+      fetchData(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const fetchData = async (email) => {
+    try {
+      const response = await axios.get("/DevProposalsAccepted", {
+        params: {
+          demail: email,
+        },
+      });
+      setacceptedProposals(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+    try {
+      const response = await axios.get("/DevProposalsCompleted", {
+        params: {
+          demail: email,
+        },
+      });
+      setcompletedProposals(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
   return (
     <>
       <Navbar />
       <div className="flex justify-center items-center mt-10">
         <div className="flex flex-col items-center">
           <div className=" flex justify-between mx-10">
-            {/* Accepted Proposals */}
-            <div className="w-2/5">
+            {/* Accepted acceptedProposals */}
+            <div className="w-[40vw]">
               <h2 className="text-xl font-semibold mb-4 bg-blue-500 rounded p-5 text-white">
                 Accepted Proposals
               </h2>
-              {/* Replace with your accepted proposals data */}
-              <ProposalCard
-                clientName="Client A"
-                proposalDescription="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                acceptedDate="2024-05-10"
-                completedDate=""
-              />
-              <ProposalCard
-                clientName="Client B"
-                proposalDescription="Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-                acceptedDate="2024-05-08"
-                completedDate=""
-              />
-              <ProposalCard
-                clientName="Client B"
-                proposalDescription="Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-                acceptedDate="2024-05-08"
-                completedDate=""
-              />
+              {acceptedProposals.map((proposal, index) => (
+                <ProposalCard
+                  key={index}
+                  clientName={proposal.cfname + " " + proposal.clname}
+                  proposalDescription={proposal.cpdescription}
+                  acceptedDate={proposal.entryDate}
+                  completedDate={proposal.completedDate}
+                />
+              ))}
             </div>
-
-            {/* Completed Proposals */}
-            <div className="w-2/5">
+            <div className="w-[10vw]"></div>
+            {/* Completed acceptedProposals */}
+            <div className="w-[40vw]">
               <h2 className="text-xl font-semibold mb-4 bg-green-500 rounded p-5 text-white">
                 Completed Proposals
               </h2>
-              {/* Replace with your completed proposals data */}
-              <ProposalCard
-                clientName="Client C"
-                proposalDescription="Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                acceptedDate="2024-05-05"
-                completedDate="2024-05-09"
-              />
-              <ProposalCard
-                clientName="Client D"
-                proposalDescription="Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-                acceptedDate="2024-05-02"
-                completedDate="2024-05-07"
-              />
-              <ProposalCard
-                clientName="Client D"
-                proposalDescription="Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-                acceptedDate="2024-05-02"
-                completedDate="2024-05-07"
-              />
-              <ProposalCard
-                clientName="Client D"
-                proposalDescription="Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-                acceptedDate="2024-05-02"
-                completedDate="2024-05-07"
-              />
-              <ProposalCard
-                clientName="Bilal baita"
-                proposalDescription="Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-                acceptedDate="2024-05-02"
-                completedDate="213"
-              />
-              <ProposalCard
-                clientName="Client D"
-                proposalDescription="Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-                acceptedDate="2024-05-02"
-                completedDate="2024-05-07"
-              />
+              {completedProposals.map((proposal, index) => (
+                <ProposalCard
+                  key={index}
+                  clientName={proposal.cfname + " " + proposal.clname}
+                  proposalDescription={proposal.cpdescription}
+                  acceptedDate={proposal.entryDate}
+                  completedDate={proposal.completedDate}
+                />
+              ))}
             </div>
           </div>
         </div>

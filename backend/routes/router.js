@@ -12,7 +12,29 @@ router.get("/DeveloperProfile", async (req, res) => {
   const testParam = req.query.test;
   res.send("Response from backend");
 });
-router.get("/DevProposals", async (req, res) => {
+router.get("/DevProposalsCompleted", async (req, res) => {
+  const param = req.query.demail;
+
+  const proposals = await schemas.Proposal.find({
+    demail: param,
+    pstatus: "completed",
+  });
+  res.send(proposals);
+});
+router.get("/DevProposalsAccepted", async (req, res) => {
+  const param = req.query.demail;
+
+  const proposals = await schemas.Proposal.find({
+    demail: param,
+    pstatus: "accepted",
+  });
+  res.send(proposals);
+});
+router.get("/Signout", async (req, res) => {
+  logedin = "TurboLance";
+  res.send([]);
+});
+router.get("/DevProposalsPending", async (req, res) => {
   const param = req.query.demail;
 
   const proposals = await schemas.Proposal.find({
