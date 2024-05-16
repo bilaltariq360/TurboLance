@@ -62,7 +62,7 @@ function Gigs() {
                     to={
                       dev.logedin === "TurboLance"
                         ? `/UsrDashboard`
-                        : `/DeveloperProfile?fname=${dev.fname}&lname=${dev.lname}&tagline=${dev.tagline}&hourlyRate=${dev.hourlyRate}&skills=${dev.skills}&logedin=${dev.logedin}`
+                        : `/DeveloperProfile?fname=${dev.fname}&lname=${dev.lname}&email=${dev.email}&tagline=${dev.tagline}&hourlyRate=${dev.hourlyRate}&skills=${dev.skills}&logedin=${dev.logedin}`
                     }
                   >
                     <div className="bg-white cursor-pointer w-[20rem] h-[28rem] rounded-md ml-1 mr-1 mt-10 shadow-lg">

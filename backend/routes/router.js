@@ -10,10 +10,20 @@ let logedin = "TurboLance";
 //const path = require('path');
 router.get("/DeveloperProfile", async (req, res) => {
   const testParam = req.query.test;
-  console.log(testParam); // Should print "sss" to the console
   res.send("Response from backend");
 });
+router.get("/DevProposals", async (req, res) => {
+  const param = req.query.demail;
 
+  const proposals = await schemas.Proposal.find({
+    demail: param,
+    pstatus: "pending",
+  });
+  res.send(proposals);
+});
+router.get("/GetEmail", async (req, res) => {
+  res.send(logedin);
+});
 router.get("/Signin", async (req, res) => {
   const email = req.query.email;
   const password = req.query.password;
@@ -39,7 +49,6 @@ router.get("/DevDashboard", async (req, res) => {
 });
 router.get("/UsrDashboard", async (req, res) => {
   const users = await schemas.Signup.find({ email: logedin });
-  console.log(users, users.length);
   res.send(users);
 });
 router.post("/Otp", async (req, res) => {
@@ -233,6 +242,65 @@ router.post("/DevDashboard" || "/Dashboard", async (req, res) => {
   if (saveDevAcc) res.send("200");
   else res.send("404");
   res.end();
+});
+router.post("/DeveloperProfile", async (req, res) => {
+  const { cemail, cfname, clname, demail, cpdescription } = req.body;
+  const newSignup = new schemas.Proposal({
+    cemail: cemail,
+    cfname: cfname,
+    clname: clname,
+    demail: demail,
+    cpdescription: cpdescription,
+  });
+  const saveSignup = await newSignup.save();
+
+  if (saveSignup) res.send("200");
+  else res.send("404");
+  res.end();
+});
+router.post("/DevProposalStatusUpdate", async (req, res) => {
+  const { cemail, demail, cpdescription } = req.body;
+
+  try {
+    // Find the existing proposal based on demail and cpdescription
+    const existingProposal = await schemas.Proposal.findOne({
+      demail,
+      cemail,
+      cpdescription,
+    });
+
+    if (!existingProposal) {
+      res.status(404).send("Proposal not found");
+      return;
+    }
+    existingProposal.pstatus = "accepted";
+    await existingProposal.save();
+    res.status(200).send("Proposal updated successfully");
+  } catch (error) {
+    console.error("Error updating proposal:", error);
+    res.status(500).send("Internal server error");
+  }
+});
+router.post("/DevProposalDelete", async (req, res) => {
+  const { demail, cemail, cpdescription } = req.body;
+
+  try {
+    const existingProposal = await schemas.Proposal.findOneAndDelete({
+      demail,
+      cemail,
+      cpdescription,
+    });
+
+    if (!existingProposal) {
+      res.status(404).send("Proposal not found");
+      return;
+    }
+
+    res.status(200).send("Proposal deleted successfully");
+  } catch (error) {
+    console.error("Error deleting proposal:", error);
+    res.status(500).send("Internal server error");
+  }
 });
 
 module.exports = router;
