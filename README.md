@@ -118,34 +118,6 @@ export default App;
 
 ```
 
-turbolance/
-├── public/
-│   ├── index.html
-│   └── ...
-├── src/
-│   ├── components/
-│   │   ├── Home.js
-│   │   ├── Signup.js
-│   │   ├── Signin.js
-│   │   ├── 404.js
-│   │   ├── Gigs.js
-│   │   ├── Contact.js
-│   │   ├── Footer.js
-│   │   ├── Dashboard.js
-│   │   ├── Documentation.js
-│   │   ├── Otp.js
-│   │   ├── ForgotPassword.js
-│   │   ├── DeveloperProfile.js
-│   │   ├── UsrDashboard.js
-│   │   ├── DevProposals.js
-│   │   ├── ProfileDropDown.js
-│   │   ├── ProposalDashboard.js
-│   │   └── WorkingProposals.js
-│   ├── App.css
-│   ├── App.js
-│   └── index.js
-├── package.json
-└── README.md
 
 ## Conclusion
 
