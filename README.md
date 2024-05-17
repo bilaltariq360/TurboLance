@@ -60,6 +60,9 @@ Upon completion, TurboLance anticipates achieving:
 
 # TurboLance: A Comprehensive Freelancing Platform
 
+<img width="945" alt="git3" src="https://github.com/bilaltariq360/TurboLance/assets/130790502/d10365ee-616e-4ab4-98d3-edcfc3f197a8">
+<img width="945" alt="git2" src="https://github.com/bilaltariq360/TurboLance/assets/130790502/ddbda4a4-b784-4cea-b06c-31dab709a1e0">
+
 ## Conclusion
 
 The proposed freelancing platform, TurboLance, offers a unique blend of innovative features designed to elevate the freelancing experience for clients and developers alike. By prioritizing transparency, fairness, and security, we aim to create a thriving ecosystem that fosters trust, collaboration, and success.
