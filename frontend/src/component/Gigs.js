@@ -40,6 +40,7 @@ function Gigs() {
         dev.fname.toLowerCase().includes(searchQuery) ||
         dev.lname.toLowerCase().includes(searchQuery) ||
         dev.tagline.toLowerCase().includes(searchQuery) ||
+        dev.hourlyRate.includes(searchQuery) ||
         dev.skills.some((skill) => skill.toLowerCase().includes(searchQuery))
     );
     setDevs(filteredDevs);
@@ -73,7 +74,7 @@ function Gigs() {
         {!showSpinner && (
           <section className="flex justify-around items-center flex-wrap px-10 py-20">
             {devs.length === 0 ? (
-              <div className="flex items-center justify-center text-4xl font-bold text-gray-900">
+              <div className="flex items-center justify-center text-4xl font-bold text-gray-300">
                 No Developer found at the Moment!
               </div>
             ) : (

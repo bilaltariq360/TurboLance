@@ -5,19 +5,26 @@ import { Link } from "react-router-dom";
 import { Spinner } from "@material-tailwind/react";
 import axios from "axios";
 
+const formatDate = (dateString) => {
+  const options = { day: "2-digit", month: "short", year: "numeric" };
+  return new Date(dateString)
+    .toLocaleDateString("en-GB", options)
+    .replace(/ /g, "-");
+};
+
 const ProposalCard = ({
   clientName,
   proposalDescription,
   acceptedDate,
   cemail,
-  updateStatus, // Add updateStatus as a prop
+  updateStatus,
 }) => {
   return (
     <div className="bg-gray-100 shadow-lg rounded-lg p-6 mb-4 duration-200 hover:bg-gray-200">
       <h3 className="text-2xl font-bold mb-2">{clientName}</h3>
       <p className="text-gray-700 mb-2">{proposalDescription}</p>
       <p className="text-sm font-semibold text-red-500">
-        Accepted: {acceptedDate}
+        Accepted: {formatDate(acceptedDate)}
       </p>
       <button
         onClick={() => {

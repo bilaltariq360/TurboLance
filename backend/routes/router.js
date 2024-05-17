@@ -244,7 +244,47 @@ router.post("/ForgotPassword", async (req, res) => {
     }
   };
 });
+router.post("/Contact", async (req, res) => {
+  const { name, email, subject, message } = req.body;
 
+  let transporter = await nodemailer.createTransport({
+    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
+    auth: {
+      user: "curiousbytes2@gmail.com",
+      pass: "svrv buoh cjrz ddmb",
+    },
+  });
+
+  let info = await transporter.sendMail({
+    from: {
+      name: "TurboLance Inc.",
+      address: "curiousbytes2@gmail.com",
+    },
+    to: `hafizbilaltariq360@gmail.com`,
+    subject: subject,
+    html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+</head>
+
+<body>
+<p><b>${"Name: " + name + " "}</b><br/>${message}</p>
+</body>
+
+</html>`,
+  });
+  const sendMail = async (transporter, mailOptions) => {
+    try {
+      await transporter.sendMail(mailOptions);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+});
 router.get("/Gigs", async (req, res) => {
   try {
     const dev = await schemas.DevAcc.find({});
@@ -286,7 +326,7 @@ router.post("/DevDashboard" || "/Dashboard", async (req, res) => {
     res.end();
   } else {
     const multiResult = await schemas.DevAcc.updateMany(
-      { email: email }, // Filter
+      { email: email },
       {
         $set: {
           email: email,
@@ -294,7 +334,7 @@ router.post("/DevDashboard" || "/Dashboard", async (req, res) => {
           skill: skill,
           hourlyRate: hourlyRate,
         },
-      } // Update
+      }
     );
   }
 });

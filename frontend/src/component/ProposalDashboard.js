@@ -4,6 +4,13 @@ import Footer from "./Footer";
 import { Spinner } from "@material-tailwind/react";
 import axios from "axios";
 
+const formatDate = (dateString) => {
+  const options = { day: "2-digit", month: "short", year: "numeric" };
+  return new Date(dateString)
+    .toLocaleDateString("en-GB", options)
+    .replace(/ /g, "-");
+};
+
 const ProposalCard = ({
   clientName,
   proposalDescription,
@@ -15,11 +22,11 @@ const ProposalCard = ({
       <h3 className="text-2xl font-bold mb-2">{clientName}</h3>
       <p className="text-gray-700 mb-2">{proposalDescription}</p>
       <p className="text-sm font-semibold text-red-500">
-        Accepted: {acceptedDate}
+        Accepted: {formatDate(acceptedDate)}
       </p>
       {completedDate !== acceptedDate ? (
         <p className="text-sm text-green-500 font-semibold">
-          Completed: {completedDate}
+          Completed: {formatDate(completedDate)}
         </p>
       ) : (
         <p className="text-sm text-blue-500 font-semibold">Status: Ongoing</p>
@@ -83,9 +90,9 @@ const ProposalDashboard = () => {
       ) : (
         <div className="flex justify-center items-center mt-10 mb-20">
           <div className="flex flex-col items-center">
-            <div className=" flex justify-between mx-10">
+            <div className="flex flex-col md:flex-row justify-between mx-10">
               {/* Accepted acceptedProposals */}
-              <div className="w-[40vw]">
+              <div className="w-[90vw] md:w-[40vw]">
                 <h2 className="text-xl font-semibold mb-4 bg-blue-500 rounded p-5 text-white">
                   Accepted Proposals
                 </h2>
@@ -101,7 +108,7 @@ const ProposalDashboard = () => {
               </div>
               <div className="w-[10vw]"></div>
               {/* Completed acceptedProposals */}
-              <div className="w-[40vw]">
+              <div className="w-[90vw] md:w-[40vw]">
                 <h2 className="text-xl font-semibold mb-4 bg-green-500 rounded p-5 text-white">
                   Completed Proposals
                 </h2>
