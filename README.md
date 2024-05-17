@@ -61,6 +61,7 @@ Upon completion, TurboLance anticipates achieving:
 # TurboLance: A Comprehensive Freelancing Platform
 
 <img width="945" alt="git3" src="https://github.com/bilaltariq360/TurboLance/assets/130790502/d10365ee-616e-4ab4-98d3-edcfc3f197a8">
+<br/>
 <img width="945" alt="git2" src="https://github.com/bilaltariq360/TurboLance/assets/130790502/ddbda4a4-b784-4cea-b06c-31dab709a1e0">
 
 ## Conclusion
