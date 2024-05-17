@@ -9,6 +9,8 @@ import Footer from "./Footer";
 
 function DevProposals() {
   const [proposals, setProposals] = useState([]);
+  const [compproposals, setcompProposals] = useState([]);
+  const [accproposals, setaccProposals] = useState([]);
   const [showSpinner, setShowSpinner] = useState(true);
   const [email, setEmail] = useState("");
 
@@ -34,6 +36,34 @@ function DevProposals() {
         },
       });
       setProposals(response.data);
+      // setTimeout(() => {
+      //   setShowSpinner(false);
+      // }, 500);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+
+    try {
+      const response = await axios.get("/DevProposalsCompleted", {
+        params: {
+          demail: email,
+        },
+      });
+      setcompProposals(response.data);
+      setTimeout(() => {
+        setShowSpinner(false);
+      }, 500);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+
+    try {
+      const response = await axios.get("/DevProposalsAccepted", {
+        params: {
+          demail: email,
+        },
+      });
+      setaccProposals(response.data);
       setTimeout(() => {
         setShowSpinner(false);
       }, 500);
@@ -80,15 +110,15 @@ function DevProposals() {
     <>
       <Navbar />
       {email === "TurboLance" ? (
-        <div className="flex justify-evenly items-center mt-10">
-          <img src={Signin} className="w-[30%] h-[30%]" />
-          <div className="text-gray-200 px-8 h-[70vh] text-5xl font-bold flex justify-center items-center">
+        <div className="flex md:my-24 justify-center md:justify-evenly mt-24 items-center flex-col md:flex-row">
+          <img src={Signin} className="w-[50%] h-[50%] md:w-[30%] md:h-[30%]" />
+          <div className="text-gray-50 px-8 h-[70vh] text-5xl font-bold mt-20 md:mt-0 md:flex md:items-center md:justify-center">
             Signin First!
           </div>
         </div>
       ) : (
         <div>
-          <div className="flex space-x-4 py-6 px-2 pl-10">
+          <div className="flex justify-center items-center space-x-4 py-6 md:px-2 md:pl-10">
             <div class="relative inline-flex">
               <Link to="/WorkingProposals">
                 <button
@@ -98,9 +128,13 @@ function DevProposals() {
                   Working Projects
                 </button>
               </Link>
-              <span class="absolute rounded-full py-1 px-1 text-xs font-medium content-[''] leading-none grid place-items-center top-[4%] right-[2%] translate-x-2/4 -translate-y-2/4 bg-red-500 text-white min-w-[24px] min-h-[24px]">
-                5
-              </span>
+              {accproposals.length > 0 ? (
+                <span class="absolute rounded-full py-1 px-1 text-xs font-medium content-[''] leading-none grid place-items-center top-[4%] right-[2%] translate-x-2/4 -translate-y-2/4 bg-red-500 text-white min-w-[24px] min-h-[24px]">
+                  {accproposals.length}
+                </span>
+              ) : (
+                ""
+              )}
             </div>
 
             <div class="relative inline-flex">
@@ -112,9 +146,13 @@ function DevProposals() {
                   Project History
                 </button>
               </Link>
-              <span class="absolute rounded-full py-1 px-1 text-xs font-medium content-[''] leading-none grid place-items-center top-[4%] right-[2%] translate-x-2/4 -translate-y-2/4 bg-red-500 text-white min-w-[24px] min-h-[24px]">
-                5
-              </span>
+              {compproposals.length + accproposals.length > 0 ? (
+                <span class="absolute rounded-full py-1 px-1 text-xs font-medium content-[''] leading-none grid place-items-center top-[4%] right-[2%] translate-x-2/4 -translate-y-2/4 bg-red-500 text-white min-w-[24px] min-h-[24px]">
+                  {compproposals.length + accproposals.length}
+                </span>
+              ) : (
+                ""
+              )}
             </div>
           </div>
           <p className="text-4xl text-gray-200 text-center font-bold mt-20">
@@ -129,7 +167,7 @@ function DevProposals() {
             proposals.map((proposal, index) => (
               <div
                 key={index}
-                className="max-w-5xl bg-white rounded-lg shadow-md overflow-hidden mx-auto my-10"
+                className="max-w-5xl mx-5 bg-white rounded-lg shadow-md overflow-hidden md:mx-auto my-10"
               >
                 <div className="border-t border-gray-200">
                   <div className="px-6 py-4">
@@ -156,7 +194,7 @@ function DevProposals() {
               </div>
             ))
           ) : (
-            <div className="text-center font-bold text-3xl bg-red-500 py-5 mt-10">
+            <div className="text-center font-bold text-3xl bg-red-500 py-5 mt-10 mb-24">
               No proposals found!
             </div>
           )}

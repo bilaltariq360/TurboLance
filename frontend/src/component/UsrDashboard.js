@@ -26,9 +26,9 @@ function UsrDashboard() {
   return (
     <>
       {users.length === 0 ? (
-        <div className="flex justify-evenly items-center">
-          <img src={Signin} className="w-[30%] h-[30%]" />
-          <div className="text-gray-50 px-8 h-[70vh] text-5xl font-bold flex justify-center items-center">
+        <div className="flex md:my-24 justify-center md:justify-evenly mt-24 items-center flex-col md:flex-row">
+          <img src={Signin} className="w-[50%] h-[50%] md:w-[30%] md:h-[30%]" />
+          <div className="text-gray-50 px-8 h-[70vh] text-5xl font-bold mt-20 md:mt-0 md:flex md:items-center md:justify-center">
             Signin First!
           </div>
         </div>

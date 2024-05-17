@@ -80,9 +80,10 @@ function Navbar() {
             <div className="flex items-center text-blue-900">
               <MdLightMode className="text-2xl cursor-pointer" />
               <div className="px-1"></div>
-              <Link to="/Dashboard">
+              {/* <Link to="/Dashboard">
                 <img src={ProfilePic} className="w-[3.5rem]" />
-              </Link>
+              </Link> */}
+              <ProfileMenu />
               <HiMenuAlt3
                 onClick={toggleMobileNav}
                 className="text-3xl text-blue-900 cursor-pointer"

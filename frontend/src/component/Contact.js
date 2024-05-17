@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./Navbar";
 import logoimg from "../img/Logo3.png";
-
+import axios from "axios";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import { ToastContainer, toast } from "react-toastify";
@@ -53,6 +53,20 @@ const Contact = () => {
       });
     }
     e.preventDefault();
+    axios({
+      method: "post",
+      url: "/Contact",
+      data: {
+        name: name,
+        email: email,
+        subject: subject,
+        message: msg,
+      },
+    });
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("subject").value = "";
+    document.getElementById("msg").value = "";
   };
   return (
     <>
@@ -110,6 +124,7 @@ const Contact = () => {
             </div>
             <div>
               <button
+                onClick={notify}
                 type="submit"
                 className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 mt-6"
               >
